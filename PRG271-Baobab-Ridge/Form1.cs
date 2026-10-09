@@ -23,8 +23,9 @@ namespace PRG271_Baobab_Ridge
             if (!File.Exists(filepath)) //if the aninmals.txt files does not exist, create it and close it. 
             {
                 File.Create(filepath).Close();
-                
+
             }
+
             string[] lines = File.ReadAllLines(filepath); //reade every file row and stores it in an array
 
             //Process each line and create Animal objects
@@ -32,21 +33,31 @@ namespace PRG271_Baobab_Ridge
 
             //iterate through above array. First, if the line is empty we will skip it. 
             int skippedRowCount = 0;
+            List<string> skippedRowMessages = new List<string>();
+            int currentRowNumber = 1;
 
             foreach (string line in lines)
             {
-                if (string.IsNullOrWhiteSpace(line))
+                int rowNumber = currentRowNumber;
+
+                void SkipCurrentRow(string reason)
                 {
                     skippedRowCount++;
-                    continue;
+                    skippedRowMessages.Add($"Row {rowNumber}: {reason}");
                 }
 
-
+                if (string.IsNullOrWhiteSpace(line))
+                {
+                    SkipCurrentRow("Row is empty.");
+                    currentRowNumber++;
+                    continue;
+                }
 
                 string[] fields = line.Split('|'); //splits the line into an array of strings using the '|' character as a delimiter. We are taking the current line and dividing it into smaller parts that are stored in fields. 
                 if (fields.Length != 7) //Need to validate we have a complete row of data.
                 {
-                    skippedRowCount++;
+                    SkipCurrentRow($"Expected 7 fields, but found {fields.Length}.");
+                    currentRowNumber++;
                     continue;
                 }
 
@@ -59,7 +70,8 @@ namespace PRG271_Baobab_Ridge
 
                 if (isAnimalIdValid == false)
                 {
-                    skippedRowCount++;
+                    SkipCurrentRow(errorMessage);
+                    currentRowNumber++;
                     continue;
                 }
 
@@ -71,7 +83,8 @@ namespace PRG271_Baobab_Ridge
                         out errorMessage);
                 if (isAnimalNameValid == false)
                 {
-                    skippedRowCount++;
+                    SkipCurrentRow(errorMessage);
+                    currentRowNumber++;
                     continue;
                 }
 
@@ -83,7 +96,8 @@ namespace PRG271_Baobab_Ridge
                         out errorMessage);
                 if (isAnimalSpeciesValid == false)
                 {
-                    skippedRowCount++;
+                    SkipCurrentRow(errorMessage);
+                    currentRowNumber++;
                     continue;
                 }
 
@@ -95,7 +109,8 @@ namespace PRG271_Baobab_Ridge
                         out errorMessage);
                 if (isAnimalAgeValid == false)
                 {
-                    skippedRowCount++;
+                    SkipCurrentRow(errorMessage);
+                    currentRowNumber++;
                     continue;
                 }
 
@@ -107,7 +122,8 @@ namespace PRG271_Baobab_Ridge
                         out errorMessage);
                 if (isRecoveryScoreValid == false)
                 {
-                    skippedRowCount++;
+                    SkipCurrentRow(errorMessage);
+                    currentRowNumber++;
                     continue;
                 }
 
@@ -121,26 +137,34 @@ namespace PRG271_Baobab_Ridge
                 //compare stored classification with calculated classification
                 if (animal.Status != storedStatus || animal.HousingUnit != storedHousingUnit)
                 {
-                    skippedRowCount++;
+                    SkipCurrentRow("Stored classification does not match the recovery score.");
+                    currentRowNumber++;
                     continue;
                 }
                 //add the animal to the list
                 animals.Add(animal);
+                currentRowNumber++;
             }
+
+            // Bind valid animals to the DataGridView
+            dgvAnimals.DataSource = null;
+            dgvAnimals.DataSource = animals;
+
+            // Only show a warning when rows were skipped
             if (skippedRowCount > 0)
             {
-                MessageBox.Show(
+                string summaryMessage =
                     $"{animals.Count} animals were loaded successfully.\n" +
-                    $"{skippedRowCount} malformed rows were skipped.",
+                    $"{skippedRowCount} rows were skipped.\n\n" +
+                    string.Join(Environment.NewLine, skippedRowMessages);
+
+                MessageBox.Show(
+                    summaryMessage,
                     "Animal Loading",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning
                 );
             }
-
-            //clear prior data source to avoid duplication
-            dgvAnimals.DataSource = null;
-            dgvAnimals.DataSource = animals; //bind the list of animals to the DataGridView control
 
 
         }
