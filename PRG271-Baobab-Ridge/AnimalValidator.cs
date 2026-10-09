@@ -1,0 +1,49 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PRG271_Baobab_Ridge
+{
+    internal static class AnimalValidator //Thhis class will handle all validation regarding the Animal class and its properties
+    //used static as we will not be instantianting this class - its used as a utility class. This means we dont need to create an object of this class to use its methods - we can call them directly using the class name. We will never need to instante it, so we just leave it as static
+    {
+        public static bool ValidateAnimalIdFormat( string idInput, out string animalId) // "out" is for us to return the cleaned up ID. Works with below line
+        {
+            //trim spaces and convert to uppercase
+            animalId = idInput.Trim().ToUpper(); //assign animal id (which is sent back) to the idInput we recieved
+
+            //check if the animalId is null or empty. First check
+            if (string.IsNullOrWhiteSpace(animalId))
+            {
+                return false;
+            }
+
+            //Check if its 7 characters long
+            if(animalId.Length != 7)
+            {
+                return false;
+            }
+
+            //Check if it starts with 'WR-'
+            if (!animalId.StartsWith("WR-"))
+            {
+                return false;
+            }
+
+            //check if the last 3 characters are digits - first need a substring of the last 3 characters
+
+            string lastThreeChars = animalId.Substring(3);
+
+            if(!int.TryParse(lastThreeChars, out _)) //atteempt to parse. We dont need the output
+            {
+                return false;
+            }
+            return true; //if all checks pass, return true
+
+
+        }
+
+    }
+}
