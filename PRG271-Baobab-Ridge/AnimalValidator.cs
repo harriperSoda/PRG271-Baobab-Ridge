@@ -45,5 +45,31 @@ namespace PRG271_Baobab_Ridge
 
         }
 
+        public static bool ValidateAnimalName(string nameInput, out string animalName)
+        {
+            //trim spaces
+            animalName = nameInput.Trim();
+
+            //check is null or empty
+            if (string.IsNullOrWhiteSpace(animalName))
+            {
+                return false;
+            }
+
+            //check length
+            if(animalName.Length > 30)
+            {
+                return false;
+            }
+
+            //check for |
+            if (animalName.Contains("|"))
+            {
+                return false;
+            }
+            return true;
+
+        }
+
     }
 }
