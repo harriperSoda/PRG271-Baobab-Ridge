@@ -23,7 +23,7 @@ namespace PRG271_Baobab_Ridge
             if (!File.Exists(filepath)) //if the aninmals.txt files does not exist, create it and close it. 
             {
                 File.Create(filepath).Close();
-                return;
+                
             }
             string[] lines = File.ReadAllLines(filepath); //reade every file row and stores it in an array
 
@@ -33,18 +33,18 @@ namespace PRG271_Baobab_Ridge
             //iterate through above array. First, if the line is empty we will skip it. 
             int skippedRowCount = 0;
 
-            foreach(string line in lines)
+            foreach (string line in lines)
             {
                 if (string.IsNullOrWhiteSpace(line))
                 {
                     skippedRowCount++;
-                    continue; 
+                    continue;
                 }
 
 
 
                 string[] fields = line.Split('|'); //splits the line into an array of strings using the '|' character as a delimiter. We are taking the current line and dividing it into smaller parts that are stored in fields. 
-                if(fields.Length != 7) //Need to validate we have a complete row of data.
+                if (fields.Length != 7) //Need to validate we have a complete row of data.
                 {
                     skippedRowCount++;
                     continue;
@@ -57,55 +57,55 @@ namespace PRG271_Baobab_Ridge
                         out string animalId,
                         out string errorMessage);
 
-                if(isAnimalIdValid == false)
+                if (isAnimalIdValid == false)
                 {
                     skippedRowCount++;
                     continue;
                 }
 
                 //we now have a valid ID and move to validate the name.
-                bool isAnimalNameValid = 
+                bool isAnimalNameValid =
                     AnimalValidator.ValidateAnimalName(
                         fields[1],
                         out string animalName,
                         out errorMessage);
-                if(isAnimalNameValid == false)
+                if (isAnimalNameValid == false)
                 {
                     skippedRowCount++;
                     continue;
                 }
 
                 //we now have a valid name and move to validate the species.
-                bool isAnimalSpeciesValid = 
+                bool isAnimalSpeciesValid =
                     AnimalValidator.ValidateAnimalSpecies(
                         fields[2],
                         out string animalSpecies,
                         out errorMessage);
-                if(isAnimalSpeciesValid == false)
+                if (isAnimalSpeciesValid == false)
                 {
                     skippedRowCount++;
                     continue;
                 }
 
                 //we now have a valid species and move to validate the age.
-                bool isAnimalAgeValid = 
+                bool isAnimalAgeValid =
                     AnimalValidator.ValidateAnimalAge(
                         fields[3],
                         out int animalAge,
                         out errorMessage);
-                if(isAnimalAgeValid == false)
+                if (isAnimalAgeValid == false)
                 {
                     skippedRowCount++;
                     continue;
                 }
 
                 //we now have a valid age and move to validate the recovery score.
-                bool isRecoveryScoreValid = 
+                bool isRecoveryScoreValid =
                     AnimalValidator.ValidateRecoveryScore(
                         fields[4],
                         out int recoveryScore,
                         out errorMessage);
-                if(isRecoveryScoreValid == false)
+                if (isRecoveryScoreValid == false)
                 {
                     skippedRowCount++;
                     continue;
@@ -119,7 +119,7 @@ namespace PRG271_Baobab_Ridge
                 string storedHousingUnit = fields[6].Trim();
 
                 //compare stored classification with calculated classification
-                if(animal.Status != storedStatus || animal.HousingUnit != storedHousingUnit)
+                if (animal.Status != storedStatus || animal.HousingUnit != storedHousingUnit)
                 {
                     skippedRowCount++;
                     continue;
@@ -138,7 +138,24 @@ namespace PRG271_Baobab_Ridge
                 );
             }
 
+            //clear prior data source to avoid duplication
+            dgvAnimals.DataSource = null;
+            dgvAnimals.DataSource = animals; //bind the list of animals to the DataGridView control
+
 
         }
+
+        private void dgvAnimals_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+       
+
     }
 }
