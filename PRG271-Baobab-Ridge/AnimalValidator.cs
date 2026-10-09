@@ -92,5 +92,21 @@ namespace PRG271_Baobab_Ridge
             return true;
         }
 
+        public static bool ValidateAnimalAge(string ageInput, out int animalAge) //Recieving data will come in the form of a string as its a text box. We will need to convert.
+        {
+            if(!int.TryParse(ageInput, out animalAge))
+            {
+                return false;
+            }
+
+            if(animalAge < 0 || animalAge > 100)
+            {
+                return false;
+            }
+
+            return true;
+
+        }
+
     }
 }
