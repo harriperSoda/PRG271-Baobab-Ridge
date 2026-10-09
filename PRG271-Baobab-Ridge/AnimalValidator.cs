@@ -34,9 +34,9 @@ namespace PRG271_Baobab_Ridge
 
             //check if the last 3 characters are digits - first need a substring of the last 3 characters
 
-            string lastThreeChars = animalId.Substring(3);
+            string numberPart = animalId.Substring(3);
 
-            if(!int.TryParse(lastThreeChars, out _)) //atteempt to parse. We dont need the output
+            if(!numberPart.All(char.IsDigit)) //check if all characters in the numberPart are digits
             {
                 return false;
             }
