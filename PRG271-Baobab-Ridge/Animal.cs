@@ -10,9 +10,9 @@ namespace PRG271_Baobab_Ridge
     {
 
         //declaring object propeties and using getters and setters for encapsulation
-        //need to review how they are used in the code - would want to make AnimalId private***
+        //might look at a feature of auto assiinigng an ID and incrementing. Need to check doc requirements
 
-        public string AnimalId { get; set; }
+        public string AnimalId { get; private set; }
         public string Name { get; set; }
         public string Species { get; set; }
         public int Age { get; set; }
