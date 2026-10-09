@@ -176,10 +176,8 @@ namespace PRG271_Baobab_Ridge
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
         }
-
-       
-
+        
+        }
     }
-}
+
