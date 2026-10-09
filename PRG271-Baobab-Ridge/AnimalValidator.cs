@@ -13,6 +13,7 @@ namespace PRG271_Baobab_Ridge
         {
             //trim spaces and convert to uppercase
             animalId = idInput.Trim().ToUpper(); //assign animal id (which is sent back) to the idInput we recieved
+            //***POTENTIAL BUG: Trimming a null will cause an error. However im not sure if this will occur with textbox input. We will need to test this. If it does occur, we can use a null conditional operator to check for null before trimming. This is a potential bug that may need to be fixed in the future. For now, we will leave it as is and test it later. Will need to be appliaed in below mwthods too
 
             //check if the animalId is null or empty. First check
             if (string.IsNullOrWhiteSpace(animalId))
