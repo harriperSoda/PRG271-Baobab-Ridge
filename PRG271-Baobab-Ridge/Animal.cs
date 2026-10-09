@@ -32,5 +32,40 @@ namespace PRG271_Baobab_Ridge
             this.Status = status;
             this.HousingUnit = housingUnit;
         }
+        //Method that CLASIFIES the animal based on its recovery score and assigns a status and housing unit accordingly
+        public void ClassifyRecovery() //REQUIRES VALIDATION
+        {
+            //We will use 'if' 'else if' as the event is mutualy exclusive - only one of the conditions can be true at a time
+            if (RecoveryScore <= 19)
+            {
+                Status = "Critical";
+                HousingUnit = "Intensive Care Unit";
+            }
+
+            else if (RecoveryScore <= 39)
+            {
+                Status = "Serious";
+                HousingUnit = "High-Dependency Ward";
+            }
+
+            else if(RecoveryScore <= 59)
+            {
+                Status = "Stable";
+                HousingUnit = "Recovery Ward";
+            }
+
+            else if(RecoveryScore <= 79)
+            {
+                Status = "Recovering";
+                HousingUnit = "Outdoor Enclosure";
+            }
+
+            else
+            {
+                Status = "Release-Ready";
+                HousingUnit = "Pre-Release Camp";
+            }
+
+        }
     }
 }
