@@ -108,5 +108,19 @@ namespace PRG271_Baobab_Ridge
 
         }
 
+        public static bool ValidateRecoveryScore(string scoreInput, out int recoveryScore)
+        {
+            if(!int.TryParse(scoreInput, out recoveryScore))
+            {
+                return false;
+            }
+
+            if(recoveryScore < 0 || recoveryScore > 100)
+            {
+                return false;
+            }
+            return true;
+        }
+
     }
 }
