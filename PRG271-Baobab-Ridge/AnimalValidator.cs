@@ -71,5 +71,26 @@ namespace PRG271_Baobab_Ridge
 
         }
 
+        public static bool ValidateAnimalSpecies(string speciesInput, out string animalSpecies)
+        {
+            animalSpecies = speciesInput.Trim();
+
+            if (string.IsNullOrWhiteSpace(animalSpecies))
+            {
+                return false;
+            }
+
+            if(animalSpecies.Contains("|"))
+            {
+                return false;
+            }
+
+            if(animalSpecies.Length > 30)
+            {
+                return false;
+            }
+            return true;
+        }
+
     }
 }
