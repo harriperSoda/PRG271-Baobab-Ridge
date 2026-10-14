@@ -10,14 +10,14 @@ namespace PRG271_Baobab_Ridge
     {
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if(dgvAnimals.SelectedRows.Count == 0)
+            if (dgvAnimals.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Please select an animal to delete");
                 return;
             }
 
             Animal? selected = dgvAnimals.SelectedRows[0].DataBoundItem as Animal;
-            if(selected == null)
+            if (selected == null)
             {
                 return;
             }
@@ -25,7 +25,7 @@ namespace PRG271_Baobab_Ridge
             DialogResult result = MessageBox.Show("Are you sure you want to delete " + selected.AnimalId + " - " + selected.Name + "?", "Confirm Delete", MessageBoxButtons.YesNo);
 
             //no: nothing changes
-            if(result == DialogResult.No)
+            if (result == DialogResult.No)
             {
                 return;
             }
@@ -48,17 +48,29 @@ namespace PRG271_Baobab_Ridge
                 return;
             }
 
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show("Could not delete animal: " + ex.Message, "Delete Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+
+            }
+
             //remove animal from animals list
             animals.Remove(selected);
 
-            //refresh the grid
             RefreshGrid();
 
             //if animal was being edited, clear the form and return to add mode
-            if(editingAnimal != null && editingAnimal.AnimalId == selected.AnimalId)
+            if(editingAnimal !=null && editingAnimal.AnimalId == selected.AnimalId)
             {
                 ExitEditMode();
             }
+
+
+        
+
+
+
         }
     }
 }

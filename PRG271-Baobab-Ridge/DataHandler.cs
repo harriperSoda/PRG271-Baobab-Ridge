@@ -8,7 +8,7 @@ namespace PRG271_Baobab_Ridge
 {
     internal class DataHandler
     {
-
+        //
         public static void DeleteAnimal(string filePath, string animalId)
         {
             string[] lines = File.ReadAllLines(filePath);
@@ -30,7 +30,7 @@ namespace PRG271_Baobab_Ridge
 
             if (!removed)
             {
-                throw new InvalidOperationException($"Animal with ID{animalId} was not found");
+                throw new InvalidOperationException($"Animal with ID {animalId} was not found in animals.txt");
             }
 
             File.WriteAllLines(filePath, newList);
