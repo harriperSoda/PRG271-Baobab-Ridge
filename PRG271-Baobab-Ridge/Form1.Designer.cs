@@ -151,12 +151,12 @@
             btnSearch.UseVisualStyleBackColor = true;
             btnSearch.Click += btnSearch_Click;
             // 
-            //btnDelete//
+            //btnDelete
             //
             btnDelete.Location = new Point(1017, 470);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(94, 29);
-            btnDelete.TabIndex = 12;
+            btnDelete.TabIndex = 11;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = true;
             btnDelete.Click += btnDelete_Click;
