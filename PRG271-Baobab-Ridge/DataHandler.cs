@@ -8,7 +8,7 @@ namespace PRG271_Baobab_Ridge
 {
     internal class DataHandler
     {
-        //
+        //removes the animal with the given ID from animal.txt, every other line remains unchanged. Throws InvalidOperationException if the ID/animal is not in the file
         public static void DeleteAnimal(string filePath, string animalId)
         {
             string[] lines = File.ReadAllLines(filePath);
