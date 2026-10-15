@@ -8,7 +8,7 @@ namespace PRG271_Baobab_Ridge
 {
     public partial class Form1
     {
-        //deletes the selected animal after the user confirms. removes it from animals.txt, refreshes the grid, and leaves edit mode if that animal was being edited
+        //deletes the selected animal after the user confirms, removes it from animals.txt, refreshed the grid, and leaves edit mode if that animal was being edited
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (dgvAnimals.SelectedRows.Count == 0)
