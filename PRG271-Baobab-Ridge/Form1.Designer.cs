@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             txtSearchId = new TextBox();
             btnAdd = new Button();
             btnUpdate = new Button();
@@ -54,6 +54,7 @@
             grpAnimals = new GroupBox();
             dgvAnimals = new DataGridView();
             grpActions = new GroupBox();
+            grpSummaryArea = new GroupBox();
             pnlHeader.SuspendLayout();
             grpAnimalDetails.SuspendLayout();
             grpSearch.SuspendLayout();
@@ -100,7 +101,7 @@
             btnUpdate.TabIndex = 8;
             btnUpdate.Text = "Save Changes";
             btnUpdate.UseVisualStyleBackColor = false;
-            btnUpdate.Click += this.btnUpdate_Click;
+            btnUpdate.Click += btnUpdate_Click;
             // 
             // btnCancel
             // 
@@ -347,14 +348,14 @@
             dgvAnimals.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvAnimals.BackgroundColor = Color.White;
             dgvAnimals.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = SystemColors.Window;
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle4.ForeColor = Color.DarkGreen;
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
-            dgvAnimals.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = Color.DarkGreen;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            dgvAnimals.DefaultCellStyle = dataGridViewCellStyle1;
             dgvAnimals.Location = new Point(15, 35);
             dgvAnimals.MultiSelect = false;
             dgvAnimals.Name = "dgvAnimals";
@@ -380,12 +381,25 @@
             grpActions.TabStop = false;
             grpActions.Text = "Actions";
             // 
+            // grpSummaryArea
+            // 
+            grpSummaryArea.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            grpSummaryArea.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            grpSummaryArea.ForeColor = Color.DarkGreen;
+            grpSummaryArea.Location = new Point(350, 635);
+            grpSummaryArea.Name = "grpSummaryArea";
+            grpSummaryArea.Size = new Size(1030, 110);
+            grpSummaryArea.TabIndex = 17;
+            grpSummaryArea.TabStop = false;
+            grpSummaryArea.Text = "Summary Report";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FloralWhite;
             ClientSize = new Size(1384, 761);
+            Controls.Add(grpSummaryArea);
             Controls.Add(grpActions);
             Controls.Add(grpSearch);
             Controls.Add(pnlHeader);
@@ -434,5 +448,6 @@
         private GroupBox grpAnimals;
         private DataGridView dgvAnimals;
         private GroupBox grpActions;
+        private GroupBox grpSummaryArea;
     }
 }
