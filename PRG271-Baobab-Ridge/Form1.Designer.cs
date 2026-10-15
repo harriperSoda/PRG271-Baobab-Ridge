@@ -36,22 +36,25 @@
             btnSearch = new Button();
             btnDelete = new Button();
             pnlHeader = new Panel();
-            lblSubtitle = new Label();
             lblTitle = new Label();
+            lblSubtitle = new Label();
             grpAnimalDetails = new GroupBox();
-            txtAnimalId = new TextBox();
-            txtName = new TextBox();
-            txtSpecies = new TextBox();
-            txtAge = new TextBox();
-            txtRecoveryScore = new TextBox();
-            lblAnimalId = new Label();
-            lblRecoveryScore = new Label();
-            lblSpecies = new Label();
-            lblAge = new Label();
             lblName = new Label();
+            lblAge = new Label();
+            lblSpecies = new Label();
+            lblRecoveryScore = new Label();
+            lblAnimalId = new Label();
+            txtRecoveryScore = new TextBox();
+            txtAge = new TextBox();
+            txtSpecies = new TextBox();
+            txtName = new TextBox();
+            txtAnimalId = new TextBox();
+            grpSearch = new GroupBox();
+            lblSearchId = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvAnimals).BeginInit();
             pnlHeader.SuspendLayout();
             grpAnimalDetails.SuspendLayout();
+            grpSearch.SuspendLayout();
             SuspendLayout();
             // 
             // dgvAnimals
@@ -73,11 +76,11 @@
             // 
             // txtSearchId
             // 
-            txtSearchId.Location = new Point(335, 535);
+            txtSearchId.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtSearchId.Location = new Point(20, 55);
             txtSearchId.Margin = new Padding(3, 2, 3, 2);
             txtSearchId.Name = "txtSearchId";
-            txtSearchId.PlaceholderText = "Search ID";
-            txtSearchId.Size = new Size(110, 23);
+            txtSearchId.Size = new Size(175, 25);
             txtSearchId.TabIndex = 6;
             // 
             // btnAdd
@@ -117,10 +120,11 @@
             // 
             // btnSearch
             // 
-            btnSearch.Location = new Point(890, 299);
+            btnSearch.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSearch.Location = new Point(205, 53);
             btnSearch.Margin = new Padding(3, 2, 3, 2);
             btnSearch.Name = "btnSearch";
-            btnSearch.Size = new Size(82, 22);
+            btnSearch.Size = new Size(85, 31);
             btnSearch.TabIndex = 10;
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = true;
@@ -148,17 +152,6 @@
             pnlHeader.Size = new Size(1384, 95);
             pnlHeader.TabIndex = 12;
             // 
-            // lblSubtitle
-            // 
-            lblSubtitle.AutoSize = true;
-            lblSubtitle.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblSubtitle.ForeColor = Color.WhiteSmoke;
-            lblSubtitle.Location = new Point(33, 57);
-            lblSubtitle.Name = "lblSubtitle";
-            lblSubtitle.Size = new Size(236, 17);
-            lblSubtitle.TabIndex = 0;
-            lblSubtitle.Text = "Animal care and recovery management";
-            // 
             // lblTitle
             // 
             lblTitle.AutoSize = true;
@@ -169,6 +162,17 @@
             lblTitle.Size = new Size(603, 37);
             lblTitle.TabIndex = 1;
             lblTitle.Text = "Baobab Ridge Wildlife Rehabilitation Records";
+            // 
+            // lblSubtitle
+            // 
+            lblSubtitle.AutoSize = true;
+            lblSubtitle.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblSubtitle.ForeColor = Color.WhiteSmoke;
+            lblSubtitle.Location = new Point(33, 57);
+            lblSubtitle.Name = "lblSubtitle";
+            lblSubtitle.Size = new Size(236, 17);
+            lblSubtitle.TabIndex = 0;
+            lblSubtitle.Text = "Animal care and recovery management";
             // 
             // grpAnimalDetails
             // 
@@ -191,89 +195,16 @@
             grpAnimalDetails.TabStop = false;
             grpAnimalDetails.Text = "Animal Details";
             // 
-            // txtAnimalId
+            // lblName
             // 
-            txtAnimalId.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtAnimalId.Location = new Point(20, 55);
-            txtAnimalId.Margin = new Padding(3, 2, 3, 2);
-            txtAnimalId.Name = "txtAnimalId";
-            txtAnimalId.PlaceholderText = "Animal ID";
-            txtAnimalId.Size = new Size(270, 25);
-            txtAnimalId.TabIndex = 6;
-            txtAnimalId.TextChanged += txtAnimalId_TextChanged;
-            // 
-            // txtName
-            // 
-            txtName.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtName.Location = new Point(20, 115);
-            txtName.Margin = new Padding(3, 2, 3, 2);
-            txtName.Name = "txtName";
-            txtName.PlaceholderText = "Name";
-            txtName.Size = new Size(270, 25);
-            txtName.TabIndex = 7;
-            // 
-            // txtSpecies
-            // 
-            txtSpecies.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtSpecies.Location = new Point(20, 175);
-            txtSpecies.Margin = new Padding(3, 2, 3, 2);
-            txtSpecies.Name = "txtSpecies";
-            txtSpecies.PlaceholderText = "Species";
-            txtSpecies.Size = new Size(270, 25);
-            txtSpecies.TabIndex = 8;
-            // 
-            // txtAge
-            // 
-            txtAge.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtAge.Location = new Point(20, 235);
-            txtAge.Margin = new Padding(3, 2, 3, 2);
-            txtAge.Name = "txtAge";
-            txtAge.PlaceholderText = "Age";
-            txtAge.Size = new Size(270, 25);
-            txtAge.TabIndex = 9;
-            // 
-            // txtRecoveryScore
-            // 
-            txtRecoveryScore.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtRecoveryScore.Location = new Point(20, 295);
-            txtRecoveryScore.Margin = new Padding(3, 2, 3, 2);
-            txtRecoveryScore.Name = "txtRecoveryScore";
-            txtRecoveryScore.PlaceholderText = "Recovery Score";
-            txtRecoveryScore.Size = new Size(270, 25);
-            txtRecoveryScore.TabIndex = 10;
-            // 
-            // lblAnimalId
-            // 
-            lblAnimalId.AutoSize = true;
-            lblAnimalId.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblAnimalId.ForeColor = Color.DarkSlateGray;
-            lblAnimalId.Location = new Point(20, 32);
-            lblAnimalId.Name = "lblAnimalId";
-            lblAnimalId.Size = new Size(64, 15);
-            lblAnimalId.TabIndex = 15;
-            lblAnimalId.Text = "Animal ID:";
-            // 
-            // lblRecoveryScore
-            // 
-            lblRecoveryScore.AutoSize = true;
-            lblRecoveryScore.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblRecoveryScore.ForeColor = Color.DarkSlateGray;
-            lblRecoveryScore.Location = new Point(20, 272);
-            lblRecoveryScore.Name = "lblRecoveryScore";
-            lblRecoveryScore.Size = new Size(98, 15);
-            lblRecoveryScore.TabIndex = 19;
-            lblRecoveryScore.Text = "Recovery Score:";
-            // 
-            // lblSpecies
-            // 
-            lblSpecies.AutoSize = true;
-            lblSpecies.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblSpecies.ForeColor = Color.DarkSlateGray;
-            lblSpecies.Location = new Point(20, 152);
-            lblSpecies.Name = "lblSpecies";
-            lblSpecies.Size = new Size(52, 15);
-            lblSpecies.TabIndex = 20;
-            lblSpecies.Text = "Species:";
+            lblName.AutoSize = true;
+            lblName.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblName.ForeColor = Color.DarkSlateGray;
+            lblName.Location = new Point(20, 92);
+            lblName.Name = "lblName";
+            lblName.Size = new Size(43, 15);
+            lblName.TabIndex = 22;
+            lblName.Text = "Name:";
             // 
             // lblAge
             // 
@@ -286,16 +217,109 @@
             lblAge.TabIndex = 21;
             lblAge.Text = "Age:";
             // 
-            // lblName
+            // lblSpecies
             // 
-            lblName.AutoSize = true;
-            lblName.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblName.ForeColor = Color.DarkSlateGray;
-            lblName.Location = new Point(20, 92);
-            lblName.Name = "lblName";
-            lblName.Size = new Size(43, 15);
-            lblName.TabIndex = 22;
-            lblName.Text = "Name:";
+            lblSpecies.AutoSize = true;
+            lblSpecies.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblSpecies.ForeColor = Color.DarkSlateGray;
+            lblSpecies.Location = new Point(20, 152);
+            lblSpecies.Name = "lblSpecies";
+            lblSpecies.Size = new Size(52, 15);
+            lblSpecies.TabIndex = 20;
+            lblSpecies.Text = "Species:";
+            // 
+            // lblRecoveryScore
+            // 
+            lblRecoveryScore.AutoSize = true;
+            lblRecoveryScore.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblRecoveryScore.ForeColor = Color.DarkSlateGray;
+            lblRecoveryScore.Location = new Point(20, 272);
+            lblRecoveryScore.Name = "lblRecoveryScore";
+            lblRecoveryScore.Size = new Size(98, 15);
+            lblRecoveryScore.TabIndex = 19;
+            lblRecoveryScore.Text = "Recovery Score:";
+            // 
+            // lblAnimalId
+            // 
+            lblAnimalId.AutoSize = true;
+            lblAnimalId.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblAnimalId.ForeColor = Color.DarkSlateGray;
+            lblAnimalId.Location = new Point(20, 32);
+            lblAnimalId.Name = "lblAnimalId";
+            lblAnimalId.Size = new Size(64, 15);
+            lblAnimalId.TabIndex = 15;
+            lblAnimalId.Text = "Animal ID:";
+            // 
+            // txtRecoveryScore
+            // 
+            txtRecoveryScore.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtRecoveryScore.Location = new Point(20, 295);
+            txtRecoveryScore.Margin = new Padding(3, 2, 3, 2);
+            txtRecoveryScore.Name = "txtRecoveryScore";
+            txtRecoveryScore.Size = new Size(270, 25);
+            txtRecoveryScore.TabIndex = 10;
+            // 
+            // txtAge
+            // 
+            txtAge.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtAge.Location = new Point(20, 235);
+            txtAge.Margin = new Padding(3, 2, 3, 2);
+            txtAge.Name = "txtAge";
+            txtAge.Size = new Size(270, 25);
+            txtAge.TabIndex = 9;
+            // 
+            // txtSpecies
+            // 
+            txtSpecies.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtSpecies.Location = new Point(20, 175);
+            txtSpecies.Margin = new Padding(3, 2, 3, 2);
+            txtSpecies.Name = "txtSpecies";
+            txtSpecies.Size = new Size(270, 25);
+            txtSpecies.TabIndex = 8;
+            // 
+            // txtName
+            // 
+            txtName.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtName.Location = new Point(20, 115);
+            txtName.Margin = new Padding(3, 2, 3, 2);
+            txtName.Name = "txtName";
+            txtName.Size = new Size(270, 25);
+            txtName.TabIndex = 7;
+            // 
+            // txtAnimalId
+            // 
+            txtAnimalId.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtAnimalId.Location = new Point(20, 55);
+            txtAnimalId.Margin = new Padding(3, 2, 3, 2);
+            txtAnimalId.Name = "txtAnimalId";
+            txtAnimalId.Size = new Size(270, 25);
+            txtAnimalId.TabIndex = 6;
+            txtAnimalId.TextChanged += txtAnimalId_TextChanged;
+            // 
+            // grpSearch
+            // 
+            grpSearch.Controls.Add(lblSearchId);
+            grpSearch.Controls.Add(txtSearchId);
+            grpSearch.Controls.Add(btnSearch);
+            grpSearch.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            grpSearch.ForeColor = Color.DarkGreen;
+            grpSearch.Location = new Point(20, 495);
+            grpSearch.Name = "grpSearch";
+            grpSearch.Size = new Size(310, 125);
+            grpSearch.TabIndex = 14;
+            grpSearch.TabStop = false;
+            grpSearch.Text = "Search by Animal ID";
+            // 
+            // lblSearchId
+            // 
+            lblSearchId.AutoSize = true;
+            lblSearchId.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblSearchId.ForeColor = Color.DarkSlateGray;
+            lblSearchId.Location = new Point(20, 32);
+            lblSearchId.Name = "lblSearchId";
+            lblSearchId.Size = new Size(64, 15);
+            lblSearchId.TabIndex = 15;
+            lblSearchId.Text = "Search ID:";
             // 
             // Form1
             // 
@@ -303,13 +327,12 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FloralWhite;
             ClientSize = new Size(1384, 761);
+            Controls.Add(grpSearch);
             Controls.Add(pnlHeader);
             Controls.Add(btnDelete);
-            Controls.Add(btnSearch);
             Controls.Add(btnCancel);
             Controls.Add(btnUpdate);
             Controls.Add(btnAdd);
-            Controls.Add(txtSearchId);
             Controls.Add(dgvAnimals);
             Controls.Add(grpAnimalDetails);
             MinimumSize = new Size(1200, 720);
@@ -322,8 +345,9 @@
             pnlHeader.PerformLayout();
             grpAnimalDetails.ResumeLayout(false);
             grpAnimalDetails.PerformLayout();
+            grpSearch.ResumeLayout(false);
+            grpSearch.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -349,5 +373,7 @@
         private Label lblSpecies;
         private Label lblRecoveryScore;
         private Label lblAnimalId;
+        private GroupBox grpSearch;
+        private Label lblSearchId;
     }
 }
