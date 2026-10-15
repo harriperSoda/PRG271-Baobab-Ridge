@@ -29,11 +29,6 @@
         private void InitializeComponent()
         {
             dgvAnimals = new DataGridView();
-            txtAnimalId = new TextBox();
-            txtName = new TextBox();
-            txtSpecies = new TextBox();
-            txtAge = new TextBox();
-            txtRecoveryScore = new TextBox();
             txtSearchId = new TextBox();
             btnAdd = new Button();
             btnUpdate = new Button();
@@ -43,8 +38,20 @@
             pnlHeader = new Panel();
             lblSubtitle = new Label();
             lblTitle = new Label();
+            grpAnimalDetails = new GroupBox();
+            txtAnimalId = new TextBox();
+            txtName = new TextBox();
+            txtSpecies = new TextBox();
+            txtAge = new TextBox();
+            txtRecoveryScore = new TextBox();
+            lblAnimalId = new Label();
+            lblRecoveryScore = new Label();
+            lblSpecies = new Label();
+            lblAge = new Label();
+            lblName = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvAnimals).BeginInit();
             pnlHeader.SuspendLayout();
+            grpAnimalDetails.SuspendLayout();
             SuspendLayout();
             // 
             // dgvAnimals
@@ -64,54 +71,9 @@
             dgvAnimals.CellClick += dgvAnimals_CellClick;
             dgvAnimals.CellContentClick += dgvAnimals_CellContentClick;
             // 
-            // txtAnimalId
-            // 
-            txtAnimalId.Location = new Point(116, 44);
-            txtAnimalId.Margin = new Padding(3, 2, 3, 2);
-            txtAnimalId.Name = "txtAnimalId";
-            txtAnimalId.PlaceholderText = "Animal ID";
-            txtAnimalId.Size = new Size(110, 23);
-            txtAnimalId.TabIndex = 1;
-            // 
-            // txtName
-            // 
-            txtName.Location = new Point(116, 99);
-            txtName.Margin = new Padding(3, 2, 3, 2);
-            txtName.Name = "txtName";
-            txtName.PlaceholderText = "Name";
-            txtName.Size = new Size(110, 23);
-            txtName.TabIndex = 2;
-            // 
-            // txtSpecies
-            // 
-            txtSpecies.Location = new Point(116, 157);
-            txtSpecies.Margin = new Padding(3, 2, 3, 2);
-            txtSpecies.Name = "txtSpecies";
-            txtSpecies.PlaceholderText = "Species";
-            txtSpecies.Size = new Size(110, 23);
-            txtSpecies.TabIndex = 3;
-            // 
-            // txtAge
-            // 
-            txtAge.Location = new Point(116, 214);
-            txtAge.Margin = new Padding(3, 2, 3, 2);
-            txtAge.Name = "txtAge";
-            txtAge.PlaceholderText = "Age";
-            txtAge.Size = new Size(110, 23);
-            txtAge.TabIndex = 4;
-            // 
-            // txtRecoveryScore
-            // 
-            txtRecoveryScore.Location = new Point(116, 279);
-            txtRecoveryScore.Margin = new Padding(3, 2, 3, 2);
-            txtRecoveryScore.Name = "txtRecoveryScore";
-            txtRecoveryScore.PlaceholderText = "Recovery Score";
-            txtRecoveryScore.Size = new Size(110, 23);
-            txtRecoveryScore.TabIndex = 5;
-            // 
             // txtSearchId
             // 
-            txtSearchId.Location = new Point(116, 343);
+            txtSearchId.Location = new Point(335, 535);
             txtSearchId.Margin = new Padding(3, 2, 3, 2);
             txtSearchId.Name = "txtSearchId";
             txtSearchId.PlaceholderText = "Search ID";
@@ -208,6 +170,133 @@
             lblTitle.TabIndex = 1;
             lblTitle.Text = "Baobab Ridge Wildlife Rehabilitation Records";
             // 
+            // grpAnimalDetails
+            // 
+            grpAnimalDetails.Controls.Add(lblName);
+            grpAnimalDetails.Controls.Add(lblAge);
+            grpAnimalDetails.Controls.Add(lblSpecies);
+            grpAnimalDetails.Controls.Add(lblRecoveryScore);
+            grpAnimalDetails.Controls.Add(lblAnimalId);
+            grpAnimalDetails.Controls.Add(txtRecoveryScore);
+            grpAnimalDetails.Controls.Add(txtAge);
+            grpAnimalDetails.Controls.Add(txtSpecies);
+            grpAnimalDetails.Controls.Add(txtName);
+            grpAnimalDetails.Controls.Add(txtAnimalId);
+            grpAnimalDetails.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            grpAnimalDetails.ForeColor = Color.DarkGreen;
+            grpAnimalDetails.Location = new Point(20, 115);
+            grpAnimalDetails.Name = "grpAnimalDetails";
+            grpAnimalDetails.Size = new Size(310, 365);
+            grpAnimalDetails.TabIndex = 13;
+            grpAnimalDetails.TabStop = false;
+            grpAnimalDetails.Text = "Animal Details";
+            // 
+            // txtAnimalId
+            // 
+            txtAnimalId.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtAnimalId.Location = new Point(20, 55);
+            txtAnimalId.Margin = new Padding(3, 2, 3, 2);
+            txtAnimalId.Name = "txtAnimalId";
+            txtAnimalId.PlaceholderText = "Animal ID";
+            txtAnimalId.Size = new Size(270, 25);
+            txtAnimalId.TabIndex = 6;
+            txtAnimalId.TextChanged += txtAnimalId_TextChanged;
+            // 
+            // txtName
+            // 
+            txtName.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtName.Location = new Point(20, 115);
+            txtName.Margin = new Padding(3, 2, 3, 2);
+            txtName.Name = "txtName";
+            txtName.PlaceholderText = "Name";
+            txtName.Size = new Size(270, 25);
+            txtName.TabIndex = 7;
+            // 
+            // txtSpecies
+            // 
+            txtSpecies.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtSpecies.Location = new Point(20, 175);
+            txtSpecies.Margin = new Padding(3, 2, 3, 2);
+            txtSpecies.Name = "txtSpecies";
+            txtSpecies.PlaceholderText = "Species";
+            txtSpecies.Size = new Size(270, 25);
+            txtSpecies.TabIndex = 8;
+            // 
+            // txtAge
+            // 
+            txtAge.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtAge.Location = new Point(20, 235);
+            txtAge.Margin = new Padding(3, 2, 3, 2);
+            txtAge.Name = "txtAge";
+            txtAge.PlaceholderText = "Age";
+            txtAge.Size = new Size(270, 25);
+            txtAge.TabIndex = 9;
+            // 
+            // txtRecoveryScore
+            // 
+            txtRecoveryScore.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtRecoveryScore.Location = new Point(20, 295);
+            txtRecoveryScore.Margin = new Padding(3, 2, 3, 2);
+            txtRecoveryScore.Name = "txtRecoveryScore";
+            txtRecoveryScore.PlaceholderText = "Recovery Score";
+            txtRecoveryScore.Size = new Size(270, 25);
+            txtRecoveryScore.TabIndex = 10;
+            // 
+            // lblAnimalId
+            // 
+            lblAnimalId.AutoSize = true;
+            lblAnimalId.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblAnimalId.ForeColor = Color.DarkSlateGray;
+            lblAnimalId.Location = new Point(20, 32);
+            lblAnimalId.Name = "lblAnimalId";
+            lblAnimalId.Size = new Size(64, 15);
+            lblAnimalId.TabIndex = 15;
+            lblAnimalId.Text = "Animal ID:";
+            // 
+            // lblRecoveryScore
+            // 
+            lblRecoveryScore.AutoSize = true;
+            lblRecoveryScore.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblRecoveryScore.ForeColor = Color.DarkSlateGray;
+            lblRecoveryScore.Location = new Point(20, 272);
+            lblRecoveryScore.Name = "lblRecoveryScore";
+            lblRecoveryScore.Size = new Size(98, 15);
+            lblRecoveryScore.TabIndex = 19;
+            lblRecoveryScore.Text = "Recovery Score:";
+            // 
+            // lblSpecies
+            // 
+            lblSpecies.AutoSize = true;
+            lblSpecies.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblSpecies.ForeColor = Color.DarkSlateGray;
+            lblSpecies.Location = new Point(20, 152);
+            lblSpecies.Name = "lblSpecies";
+            lblSpecies.Size = new Size(52, 15);
+            lblSpecies.TabIndex = 20;
+            lblSpecies.Text = "Species:";
+            // 
+            // lblAge
+            // 
+            lblAge.AutoSize = true;
+            lblAge.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblAge.ForeColor = Color.DarkSlateGray;
+            lblAge.Location = new Point(20, 212);
+            lblAge.Name = "lblAge";
+            lblAge.Size = new Size(32, 15);
+            lblAge.TabIndex = 21;
+            lblAge.Text = "Age:";
+            // 
+            // lblName
+            // 
+            lblName.AutoSize = true;
+            lblName.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblName.ForeColor = Color.DarkSlateGray;
+            lblName.Location = new Point(20, 92);
+            lblName.Name = "lblName";
+            lblName.Size = new Size(43, 15);
+            lblName.TabIndex = 22;
+            lblName.Text = "Name:";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -221,12 +310,8 @@
             Controls.Add(btnUpdate);
             Controls.Add(btnAdd);
             Controls.Add(txtSearchId);
-            Controls.Add(txtRecoveryScore);
-            Controls.Add(txtAge);
-            Controls.Add(txtSpecies);
-            Controls.Add(txtName);
-            Controls.Add(txtAnimalId);
             Controls.Add(dgvAnimals);
+            Controls.Add(grpAnimalDetails);
             MinimumSize = new Size(1200, 720);
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
@@ -235,6 +320,8 @@
             ((System.ComponentModel.ISupportInitialize)dgvAnimals).EndInit();
             pnlHeader.ResumeLayout(false);
             pnlHeader.PerformLayout();
+            grpAnimalDetails.ResumeLayout(false);
+            grpAnimalDetails.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -242,11 +329,6 @@
         #endregion
 
         private DataGridView dgvAnimals;
-        private TextBox txtAnimalId;
-        private TextBox txtName;
-        private TextBox txtSpecies;
-        private TextBox txtAge;
-        private TextBox txtRecoveryScore;
         private TextBox txtSearchId;
         private Button btnAdd;
         private Button btnUpdate;
@@ -256,5 +338,16 @@
         private Panel pnlHeader;
         private Label lblTitle;
         private Label lblSubtitle;
+        private GroupBox grpAnimalDetails;
+        private TextBox txtRecoveryScore;
+        private TextBox txtAge;
+        private TextBox txtSpecies;
+        private TextBox txtName;
+        private TextBox txtAnimalId;
+        private Label lblName;
+        private Label lblAge;
+        private Label lblSpecies;
+        private Label lblRecoveryScore;
+        private Label lblAnimalId;
     }
 }
