@@ -31,6 +31,7 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             txtSearchId = new TextBox();
             btnAdd = new Button();
             btnUpdate = new Button();
@@ -57,12 +58,14 @@
             dgvAnimals = new DataGridView();
             grpActions = new GroupBox();
             grpSummaryArea = new GroupBox();
+            picLogo = new PictureBox();
             pnlHeader.SuspendLayout();
             grpAnimalDetails.SuspendLayout();
             grpSearch.SuspendLayout();
             grpAnimals.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAnimals).BeginInit();
             grpActions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)picLogo).BeginInit();
             SuspendLayout();
             // 
             // txtSearchId
@@ -152,6 +155,7 @@
             // pnlHeader
             // 
             pnlHeader.BackColor = Color.DarkGreen;
+            pnlHeader.Controls.Add(picLogo);
             pnlHeader.Controls.Add(lblTitle);
             pnlHeader.Controls.Add(lblSubtitle);
             pnlHeader.Dock = DockStyle.Top;
@@ -165,7 +169,7 @@
             lblTitle.AutoSize = true;
             lblTitle.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTitle.ForeColor = Color.White;
-            lblTitle.Location = new Point(30, 15);
+            lblTitle.Location = new Point(105, 15);
             lblTitle.Name = "lblTitle";
             lblTitle.Size = new Size(603, 37);
             lblTitle.TabIndex = 1;
@@ -176,7 +180,7 @@
             lblSubtitle.AutoSize = true;
             lblSubtitle.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblSubtitle.ForeColor = Color.WhiteSmoke;
-            lblSubtitle.Location = new Point(33, 57);
+            lblSubtitle.Location = new Point(108, 57);
             lblSubtitle.Name = "lblSubtitle";
             lblSubtitle.Size = new Size(236, 17);
             lblSubtitle.TabIndex = 0;
@@ -194,6 +198,7 @@
             grpAnimalDetails.Controls.Add(txtSpecies);
             grpAnimalDetails.Controls.Add(txtName);
             grpAnimalDetails.Controls.Add(txtAnimalId);
+            grpAnimalDetails.FlatStyle = FlatStyle.Flat;
             grpAnimalDetails.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             grpAnimalDetails.ForeColor = Color.DarkGreen;
             grpAnimalDetails.Location = new Point(20, 115);
@@ -407,6 +412,17 @@
             grpSummaryArea.TabStop = false;
             grpSummaryArea.Text = "Summary Report";
             // 
+            // picLogo
+            // 
+            picLogo.BackColor = Color.Transparent;
+            picLogo.Image = (Image)resources.GetObject("picLogo.Image");
+            picLogo.Location = new Point(20, 12);
+            picLogo.Name = "picLogo";
+            picLogo.Size = new Size(70, 70);
+            picLogo.SizeMode = PictureBoxSizeMode.Zoom;
+            picLogo.TabIndex = 2;
+            picLogo.TabStop = false;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -419,7 +435,7 @@
             Controls.Add(pnlHeader);
             Controls.Add(grpAnimalDetails);
             Controls.Add(grpAnimals);
-            MinimumSize = new Size(1200, 720);
+            MinimumSize = new Size(1200, 726);
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Baobab Ridge Wildlife Rehabilitation Records";
@@ -433,6 +449,7 @@
             grpAnimals.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvAnimals).EndInit();
             grpActions.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)picLogo).EndInit();
             ResumeLayout(false);
         }
 
@@ -463,5 +480,6 @@
         private DataGridView dgvAnimals;
         private GroupBox grpActions;
         private GroupBox grpSummaryArea;
+        private PictureBox picLogo;
     }
 }
