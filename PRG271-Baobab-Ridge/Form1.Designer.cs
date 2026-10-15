@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             txtSearchId = new TextBox();
             btnAdd = new Button();
             btnUpdate = new Button();
@@ -344,22 +346,34 @@
             // 
             dgvAnimals.AllowUserToAddRows = false;
             dgvAnimals.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.BackColor = Color.Honeydew;
+            dgvAnimals.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dgvAnimals.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvAnimals.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvAnimals.BackgroundColor = Color.White;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.DarkGreen;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dgvAnimals.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dgvAnimals.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Window;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = Color.DarkGreen;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            dgvAnimals.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Window;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = Color.DarkGreen;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dgvAnimals.DefaultCellStyle = dataGridViewCellStyle3;
+            dgvAnimals.GridColor = Color.Gainsboro;
             dgvAnimals.Location = new Point(15, 35);
             dgvAnimals.MultiSelect = false;
             dgvAnimals.Name = "dgvAnimals";
             dgvAnimals.ReadOnly = true;
+            dgvAnimals.RowHeadersVisible = false;
             dgvAnimals.RowHeadersWidth = 51;
             dgvAnimals.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvAnimals.Size = new Size(790, 450);

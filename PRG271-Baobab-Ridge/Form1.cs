@@ -150,6 +150,10 @@ namespace PRG271_Baobab_Ridge
             dgvAnimals.DataSource = null;
             dgvAnimals.DataSource = animals;
 
+            dgvAnimals.Columns["AnimalId"].HeaderText = "Animal ID";
+            dgvAnimals.Columns["RecoveryScore"].HeaderText = "Recovery Score";
+            dgvAnimals.Columns["HousingUnit"].HeaderText = "Housing Unit";
+
             // Only show a warning when rows were skipped
             if (skippedRowCount > 0)
             {
