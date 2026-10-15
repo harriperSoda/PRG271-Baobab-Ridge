@@ -39,6 +39,7 @@
             btnUpdate = new Button();
             btnCancel = new Button();
             btnSearch = new Button();
+            btnDelete = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvAnimals).BeginInit();
             SuspendLayout();
             // 
@@ -150,11 +151,22 @@
             btnSearch.UseVisualStyleBackColor = true;
             btnSearch.Click += btnSearch_Click;
             // 
+            //btnDelete
+            //
+            btnDelete.Location = new Point(1017, 470);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(94, 29);
+            btnDelete.TabIndex = 11;
+            btnDelete.Text = "Delete";
+            btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
+
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1353, 695);
+            Controls.Add(btnDelete);
             Controls.Add(btnSearch);
             Controls.Add(btnCancel);
             Controls.Add(btnUpdate);
@@ -188,5 +200,6 @@
         private Button btnUpdate;
         private Button btnCancel;
         private Button btnSearch;
+        private Button btnDelete;
     }
 }
