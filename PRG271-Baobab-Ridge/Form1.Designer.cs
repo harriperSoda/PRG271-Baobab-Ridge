@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dgvAnimals = new DataGridView();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             txtSearchId = new TextBox();
             btnAdd = new Button();
             btnUpdate = new Button();
@@ -51,28 +51,16 @@
             txtAnimalId = new TextBox();
             grpSearch = new GroupBox();
             lblSearchId = new Label();
-            ((System.ComponentModel.ISupportInitialize)dgvAnimals).BeginInit();
+            grpAnimals = new GroupBox();
+            dgvAnimals = new DataGridView();
+            grpActions = new GroupBox();
             pnlHeader.SuspendLayout();
             grpAnimalDetails.SuspendLayout();
             grpSearch.SuspendLayout();
+            grpAnimals.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvAnimals).BeginInit();
+            grpActions.SuspendLayout();
             SuspendLayout();
-            // 
-            // dgvAnimals
-            // 
-            dgvAnimals.AllowUserToAddRows = false;
-            dgvAnimals.AllowUserToDeleteRows = false;
-            dgvAnimals.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvAnimals.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvAnimals.Location = new Point(320, 44);
-            dgvAnimals.MultiSelect = false;
-            dgvAnimals.Name = "dgvAnimals";
-            dgvAnimals.ReadOnly = true;
-            dgvAnimals.RowHeadersWidth = 51;
-            dgvAnimals.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvAnimals.Size = new Size(515, 319);
-            dgvAnimals.TabIndex = 0;
-            dgvAnimals.CellClick += dgvAnimals_CellClick;
-            dgvAnimals.CellContentClick += dgvAnimals_CellContentClick;
             // 
             // txtSearchId
             // 
@@ -85,37 +73,50 @@
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(890, 136);
+            btnAdd.BackColor = Color.SeaGreen;
+            btnAdd.FlatStyle = FlatStyle.Flat;
+            btnAdd.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAdd.ForeColor = Color.White;
+            btnAdd.Location = new Point(20, 55);
             btnAdd.Margin = new Padding(3, 2, 3, 2);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(82, 22);
+            btnAdd.Size = new Size(150, 45);
             btnAdd.TabIndex = 7;
-            btnAdd.Text = "Add";
-            btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Text = "Add Animal";
+            btnAdd.UseVisualStyleBackColor = false;
             btnAdd.Click += btnAdd_Click;
             // 
             // btnUpdate
             // 
+            btnUpdate.BackColor = Color.SteelBlue;
             btnUpdate.Enabled = false;
-            btnUpdate.Location = new Point(890, 193);
+            btnUpdate.FlatStyle = FlatStyle.Flat;
+            btnUpdate.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnUpdate.ForeColor = Color.White;
+            btnUpdate.Location = new Point(20, 125);
             btnUpdate.Margin = new Padding(3, 2, 3, 2);
             btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new Size(82, 22);
+            btnUpdate.Size = new Size(150, 45);
             btnUpdate.TabIndex = 8;
-            btnUpdate.Text = "Update";
-            btnUpdate.UseVisualStyleBackColor = true;
-            btnUpdate.Click += btnUpdate_Click;
+            btnUpdate.Text = "Save Changes";
+            btnUpdate.UseVisualStyleBackColor = false;
+            btnUpdate.Click += this.btnUpdate_Click;
             // 
             // btnCancel
             // 
+            btnCancel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            btnCancel.BackColor = Color.DimGray;
             btnCancel.Enabled = false;
-            btnCancel.Location = new Point(890, 245);
+            btnCancel.FlatStyle = FlatStyle.Flat;
+            btnCancel.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnCancel.ForeColor = Color.White;
+            btnCancel.Location = new Point(20, 195);
             btnCancel.Margin = new Padding(3, 2, 3, 2);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(82, 22);
+            btnCancel.Size = new Size(150, 45);
             btnCancel.TabIndex = 9;
             btnCancel.Text = "Cancel";
-            btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.UseVisualStyleBackColor = false;
             btnCancel.Click += btnCancel_Click;
             // 
             // btnSearch
@@ -132,13 +133,17 @@
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(890, 352);
+            btnDelete.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            btnDelete.BackColor = Color.IndianRed;
+            btnDelete.FlatStyle = FlatStyle.Flat;
+            btnDelete.ForeColor = Color.White;
+            btnDelete.Location = new Point(20, 265);
             btnDelete.Margin = new Padding(3, 2, 3, 2);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(82, 22);
+            btnDelete.Size = new Size(150, 45);
             btnDelete.TabIndex = 11;
-            btnDelete.Text = "Delete";
-            btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Text = "Delete Animal";
+            btnDelete.UseVisualStyleBackColor = false;
             btnDelete.Click += btnDelete_Click;
             // 
             // pnlHeader
@@ -321,38 +326,89 @@
             lblSearchId.TabIndex = 15;
             lblSearchId.Text = "Search ID:";
             // 
+            // grpAnimals
+            // 
+            grpAnimals.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            grpAnimals.Controls.Add(dgvAnimals);
+            grpAnimals.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            grpAnimals.ForeColor = Color.DarkGreen;
+            grpAnimals.Location = new Point(350, 115);
+            grpAnimals.Name = "grpAnimals";
+            grpAnimals.Size = new Size(820, 505);
+            grpAnimals.TabIndex = 15;
+            grpAnimals.TabStop = false;
+            grpAnimals.Text = "Animals in Care";
+            // 
+            // dgvAnimals
+            // 
+            dgvAnimals.AllowUserToAddRows = false;
+            dgvAnimals.AllowUserToDeleteRows = false;
+            dgvAnimals.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvAnimals.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvAnimals.BackgroundColor = Color.White;
+            dgvAnimals.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.Window;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = Color.DarkGreen;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            dgvAnimals.DefaultCellStyle = dataGridViewCellStyle4;
+            dgvAnimals.Location = new Point(15, 35);
+            dgvAnimals.MultiSelect = false;
+            dgvAnimals.Name = "dgvAnimals";
+            dgvAnimals.ReadOnly = true;
+            dgvAnimals.RowHeadersWidth = 51;
+            dgvAnimals.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvAnimals.Size = new Size(790, 450);
+            dgvAnimals.TabIndex = 1;
+            // 
+            // grpActions
+            // 
+            grpActions.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            grpActions.Controls.Add(btnAdd);
+            grpActions.Controls.Add(btnUpdate);
+            grpActions.Controls.Add(btnCancel);
+            grpActions.Controls.Add(btnDelete);
+            grpActions.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            grpActions.ForeColor = Color.DarkGreen;
+            grpActions.Location = new Point(1190, 115);
+            grpActions.Name = "grpActions";
+            grpActions.Size = new Size(190, 505);
+            grpActions.TabIndex = 16;
+            grpActions.TabStop = false;
+            grpActions.Text = "Actions";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FloralWhite;
             ClientSize = new Size(1384, 761);
+            Controls.Add(grpActions);
             Controls.Add(grpSearch);
             Controls.Add(pnlHeader);
-            Controls.Add(btnDelete);
-            Controls.Add(btnCancel);
-            Controls.Add(btnUpdate);
-            Controls.Add(btnAdd);
-            Controls.Add(dgvAnimals);
             Controls.Add(grpAnimalDetails);
+            Controls.Add(grpAnimals);
             MinimumSize = new Size(1200, 720);
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Baobab Ridge Wildlife Rehabilitation Records";
             Load += Form1_Load;
-            ((System.ComponentModel.ISupportInitialize)dgvAnimals).EndInit();
             pnlHeader.ResumeLayout(false);
             pnlHeader.PerformLayout();
             grpAnimalDetails.ResumeLayout(false);
             grpAnimalDetails.PerformLayout();
             grpSearch.ResumeLayout(false);
             grpSearch.PerformLayout();
+            grpAnimals.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvAnimals).EndInit();
+            grpActions.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
-
-        private DataGridView dgvAnimals;
         private TextBox txtSearchId;
         private Button btnAdd;
         private Button btnUpdate;
@@ -375,5 +431,8 @@
         private Label lblAnimalId;
         private GroupBox grpSearch;
         private Label lblSearchId;
+        private GroupBox grpAnimals;
+        private DataGridView dgvAnimals;
+        private GroupBox grpActions;
     }
 }
