@@ -6,10 +6,15 @@
 
         private string AnimalsFilePath => Path.Combine(Application.StartupPath, "animals.txt");
 
+        //Refreshed the animal grid and clears auto selected rows
         private void RefreshGrid()
         {
             dgvAnimals.DataSource = null;
             dgvAnimals.DataSource = animals;
+
+            //requires the use to select a row
+            dgvAnimals.ClearSelection();
+            dgvAnimals.CurrentCell = null;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)

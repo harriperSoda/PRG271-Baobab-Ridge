@@ -184,6 +184,9 @@ namespace PRG271_Baobab_Ridge
             dgvAnimals.Columns["RecoveryScore"].HeaderText = "Recovery Score";
             dgvAnimals.Columns["HousingUnit"].HeaderText = "Housing Unit";
 
+            //prevent the first row from being deleted automatically selected after loading. Relates to line 15 in addEditForm1
+            dgvAnimals.ClearSelection();
+
             // Only show a warning when rows were skipped
             if (skippedRowCount > 0)
             {
@@ -208,8 +211,11 @@ namespace PRG271_Baobab_Ridge
 
         }
 
+        // Clears the automatic grid selection when the form finishes loading.
         private void Form1_Load(object sender, EventArgs e)
         {
+            dgvAnimals.ClearSelection();
+            dgvAnimals.CurrentCell = null;
         }
 
         private void txtAnimalId_TextChanged(object sender, EventArgs e)
