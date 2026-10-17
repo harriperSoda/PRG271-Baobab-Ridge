@@ -23,7 +23,9 @@ namespace PRG271_Baobab_Ridge
                 return;
             }
 
-            DialogResult result = MessageBox.Show("Are you sure you want to delete " + selected.AnimalId + " - " + selected.Name + "?", "Confirm Delete", MessageBoxButtons.YesNo);
+            DialogResult result = MessageBox.Show("Are you sure you want to delete "  + selected.AnimalId + " - " + selected.Name +
+                " This cannot be undone."
+                 + "?", "Confirm Delete", MessageBoxButtons.YesNo);
 
             //no: nothing changes
             if (result == DialogResult.No)
