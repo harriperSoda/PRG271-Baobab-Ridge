@@ -6,22 +6,53 @@
 
         private string AnimalsFilePath => Path.Combine(Application.StartupPath, "animals.txt");
 
+        //Refreshed the animal grid and clears auto selected rows
         private void RefreshGrid()
         {
             dgvAnimals.DataSource = null;
             dgvAnimals.DataSource = animals;
+
+            //Restore the prior user-friendly columns and headings. Without this it reverts back to AnimalID, instead of Animal ID
+            dgvAnimals.Columns["AnimalId"].HeaderText = "Animal ID";
+            dgvAnimals.Columns["RecoveryScore"].HeaderText = "Recovery Score";
+            dgvAnimals.Columns["HousingUnit"].HeaderText = "Housing Unit";
+
+            //requires the use to select a row
+            dgvAnimals.ClearSelection();
+            dgvAnimals.CurrentCell = null;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            //read form input -> validate
-            if (!AnimalValidator.ValidateAnimalIdFormat(txtAnimalId.Text, out string animalId, out string error) ||
-                !AnimalValidator.ValidateAnimalName(txtName.Text, out string name, out error) ||
-                !AnimalValidator.ValidateAnimalSpecies(txtSpecies.Text, out string species, out error) ||
-                !AnimalValidator.ValidateAnimalAge(txtAge.Text, out int age, out error) ||
-                !AnimalValidator.ValidateRecoveryScore(txtRecoveryScore.Text, out int score, out error))
+            //read form input -> validate each field seperately with focus
+            if(!AnimalValidator.ValidateAnimalIdFormat(txtAnimalId.Text, out string animalId, out string error))
             {
-                MessageBox.Show(error, "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(error, "Invalid ID", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtAnimalId.Focus();
+                return;
+            }
+            if(!AnimalValidator.ValidateAnimalName(txtName.Text, out string name, out error))
+            {
+                MessageBox.Show(error, "Invalid Name", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtName.Focus();
+                return;
+            }
+            if (!AnimalValidator.ValidateAnimalSpecies(txtSpecies.Text, out string species, out error))
+            {
+                MessageBox.Show(error, "Invalid Species", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtSpecies.Focus();
+                return;
+            }
+            if (!AnimalValidator.ValidateAnimalAge(txtAge.Text, out int age, out error))
+            {
+                MessageBox.Show(error, "Invalid Age", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtAge.Focus();
+                return;
+            }
+            if (!AnimalValidator.ValidateRecoveryScore(txtRecoveryScore.Text, out int score, out error))
+            {
+                MessageBox.Show(error, "Invalid Recovery Score", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtRecoveryScore.Focus();
                 return;
             }
 
@@ -51,6 +82,12 @@
             //refresh grid -> clear form
             animals.Add(animal);
             RefreshGrid();
+
+            //Add message box to confirm addition
+            MessageBox.Show(
+                $"Animal added successfully \n\n" +
+                $"Status: {animal.Status} \n" +
+                $"Housing Unit: {animal.HousingUnit}");
             ClearForm();
         }
 
@@ -136,15 +173,32 @@
         {
             if (editingAnimal == null) return;
 
-            //the ID is locked, so only validate the editable fields
-            if (!AnimalValidator.ValidateAnimalName(txtName.Text, out string name, out string error) ||
-                !AnimalValidator.ValidateAnimalSpecies(txtSpecies.Text, out string species, out error) ||
-                !AnimalValidator.ValidateAnimalAge(txtAge.Text, out int age, out error) ||
-                !AnimalValidator.ValidateRecoveryScore(txtRecoveryScore.Text, out int score, out error))
+            //the ID is locked, so only validate the editable fields seperately and add focus on invalid field
+            if(!AnimalValidator.ValidateAnimalName(txtName.Text, out string name, out string error))
             {
-                MessageBox.Show(error, "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(error, "Invalid Name", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtName.Focus();
                 return;
             }
+            if (!AnimalValidator.ValidateAnimalSpecies(txtSpecies.Text, out string species, out error))
+            {
+                MessageBox.Show(error, "Invalid Species", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtSpecies.Focus();
+                return;
+            }
+            if (!AnimalValidator.ValidateAnimalAge(txtAge.Text, out int age, out error))
+            {
+                MessageBox.Show(error, "Invalid Age", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtAge.Focus();
+                return;
+            }
+            if (!AnimalValidator.ValidateRecoveryScore(txtRecoveryScore.Text, out int score, out error))
+            {
+                MessageBox.Show(error, "Invalid Recovery Score", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtRecoveryScore.Focus();
+                return;
+            }
+
 
             //remember old values so we can roll back if the file write fails
             string oldName = editingAnimal.Name;

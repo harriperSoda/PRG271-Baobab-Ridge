@@ -20,15 +20,45 @@ namespace PRG271_Baobab_Ridge
 
             string filepath = Path.Combine(Application.StartupPath, "animals.txt"); //provideds the folder containing the running application and Path.Combine adds the file name. 
 
-            if (!File.Exists(filepath)) //if the aninmals.txt files does not exist, create it and close it. 
+
+            //Declare the array outside the try block so it can processed afterwards
+            string[] lines;
+
+            try
             {
-                File.Create(filepath).Close();
-
+                //create an empty data file when it does not exists
+                if (!File.Exists(filepath))
+                {
+                    File.Create(filepath).Close();
+                }
+                //read every record for validations
+                lines = File.ReadAllLines(filepath);
             }
+            catch (UnauthorizedAccessException) //user informed if the file cant be accessed due to permission issues.
+            {
+                MessageBox.Show(
+                    "Permission was denied when accessing animals.txt. " +
+                    "Check that the file and application folder are writable.",
+                    "Access Denied",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
 
-            string[] lines = File.ReadAllLines(filepath); //reade every file row and stores it in an array
+                RefreshGrid();
+                return;
+            }
+            catch (IOException) //user informed if the file cant be accessed due to it being used by another program.
+            {
+                MessageBox.Show(
+                    "animals.txt could not be read " +
+                    "It may be in use by another program", 
+                    "File Access Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                    );
 
-            //Process each line and create Animal objects
+                RefreshGrid();
+                return;
+            }
 
 
             //iterate through above array. First, if the line is empty we will skip it. 
@@ -154,6 +184,9 @@ namespace PRG271_Baobab_Ridge
             dgvAnimals.Columns["RecoveryScore"].HeaderText = "Recovery Score";
             dgvAnimals.Columns["HousingUnit"].HeaderText = "Housing Unit";
 
+            //prevent the first row from being deleted automatically selected after loading. Relates to line 15 in addEditForm1
+            dgvAnimals.ClearSelection();
+
             // Only show a warning when rows were skipped
             if (skippedRowCount > 0)
             {
@@ -178,8 +211,11 @@ namespace PRG271_Baobab_Ridge
 
         }
 
+        // Clears the automatic grid selection when the form finishes loading.
         private void Form1_Load(object sender, EventArgs e)
         {
+            dgvAnimals.ClearSelection();
+            dgvAnimals.CurrentCell = null;
         }
 
         private void txtAnimalId_TextChanged(object sender, EventArgs e)
