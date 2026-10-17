@@ -12,6 +12,11 @@
             dgvAnimals.DataSource = null;
             dgvAnimals.DataSource = animals;
 
+            //Restore the prior user-friendly columns and headings. Without this it reverts back to AnimalID, instead of Animal ID
+            dgvAnimals.Columns["AnimalId"].HeaderText = "Animal ID";
+            dgvAnimals.Columns["RecoveryScore"].HeaderText = "Recovery Score";
+            dgvAnimals.Columns["HousingUnit"].HeaderText = "Housing Unit";
+
             //requires the use to select a row
             dgvAnimals.ClearSelection();
             dgvAnimals.CurrentCell = null;
