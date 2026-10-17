@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             txtSearchId = new TextBox();
             btnAdd = new Button();
             btnUpdate = new Button();
@@ -39,6 +39,7 @@
             btnSearch = new Button();
             btnDelete = new Button();
             pnlHeader = new Panel();
+            picLogo = new PictureBox();
             lblTitle = new Label();
             lblSubtitle = new Label();
             grpAnimalDetails = new GroupBox();
@@ -58,14 +59,32 @@
             dgvAnimals = new DataGridView();
             grpActions = new GroupBox();
             grpSummaryArea = new GroupBox();
-            picLogo = new PictureBox();
+            lblReleaseReadyCaption = new Label();
+            lblRecoveringCaption = new Label();
+            lblSeriousCaption = new Label();
+            lblStableCaption = new Label();
+            lblCriticalCaption = new Label();
+            lblAverageScoreCaption = new Label();
+            lblAverageAgeCaption = new Label();
+            lblTotalCaption = new Label();
+            lblReleaseReady = new Label();
+            lblRecovering = new Label();
+            lblStable = new Label();
+            lblSerious = new Label();
+            lblCritical = new Label();
+            lblAvgScore = new Label();
+            lblAvgAge = new Label();
+            lblTotal = new Label();
+            btnGenerateSummary = new Button();
+            pnlSummaryStats = new Panel();
             pnlHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)picLogo).BeginInit();
             grpAnimalDetails.SuspendLayout();
             grpSearch.SuspendLayout();
             grpAnimals.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvAnimals).BeginInit();
             grpActions.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)picLogo).BeginInit();
+            grpSummaryArea.SuspendLayout();
             SuspendLayout();
             // 
             // txtSearchId
@@ -154,7 +173,7 @@
             // 
             // pnlHeader
             // 
-            pnlHeader.BackColor = Color.DarkGreen;
+            pnlHeader.BackColor = Color.FromArgb(39, 70, 46);
             pnlHeader.Controls.Add(picLogo);
             pnlHeader.Controls.Add(lblTitle);
             pnlHeader.Controls.Add(lblSubtitle);
@@ -163,6 +182,17 @@
             pnlHeader.Name = "pnlHeader";
             pnlHeader.Size = new Size(1384, 95);
             pnlHeader.TabIndex = 12;
+            // 
+            // picLogo
+            // 
+            picLogo.BackColor = Color.Transparent;
+            picLogo.Image = (Image)resources.GetObject("picLogo.Image");
+            picLogo.Location = new Point(20, 12);
+            picLogo.Name = "picLogo";
+            picLogo.Size = new Size(70, 70);
+            picLogo.SizeMode = PictureBoxSizeMode.Zoom;
+            picLogo.TabIndex = 2;
+            picLogo.TabStop = false;
             // 
             // lblTitle
             // 
@@ -188,6 +218,7 @@
             // 
             // grpAnimalDetails
             // 
+            grpAnimalDetails.BackColor = Color.FromArgb(224, 224, 224);
             grpAnimalDetails.Controls.Add(lblName);
             grpAnimalDetails.Controls.Add(lblAge);
             grpAnimalDetails.Controls.Add(lblSpecies);
@@ -200,7 +231,7 @@
             grpAnimalDetails.Controls.Add(txtAnimalId);
             grpAnimalDetails.FlatStyle = FlatStyle.Flat;
             grpAnimalDetails.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            grpAnimalDetails.ForeColor = Color.DarkGreen;
+            grpAnimalDetails.ForeColor = Color.Black;
             grpAnimalDetails.Location = new Point(20, 115);
             grpAnimalDetails.Name = "grpAnimalDetails";
             grpAnimalDetails.Size = new Size(310, 365);
@@ -311,11 +342,12 @@
             // 
             // grpSearch
             // 
+            grpSearch.BackColor = Color.FromArgb(224, 224, 224);
             grpSearch.Controls.Add(lblSearchId);
             grpSearch.Controls.Add(txtSearchId);
             grpSearch.Controls.Add(btnSearch);
             grpSearch.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            grpSearch.ForeColor = Color.DarkGreen;
+            grpSearch.ForeColor = Color.Black;
             grpSearch.Location = new Point(20, 495);
             grpSearch.Name = "grpSearch";
             grpSearch.Size = new Size(310, 125);
@@ -337,9 +369,10 @@
             // grpAnimals
             // 
             grpAnimals.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            grpAnimals.BackColor = Color.FromArgb(224, 224, 224);
             grpAnimals.Controls.Add(dgvAnimals);
             grpAnimals.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            grpAnimals.ForeColor = Color.DarkGreen;
+            grpAnimals.ForeColor = Color.Black;
             grpAnimals.Location = new Point(350, 115);
             grpAnimals.Name = "grpAnimals";
             grpAnimals.Size = new Size(820, 505);
@@ -368,7 +401,7 @@
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = SystemColors.Window;
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle3.ForeColor = Color.DarkGreen;
+            dataGridViewCellStyle3.ForeColor = Color.Black;
             dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
@@ -383,19 +416,21 @@
             dgvAnimals.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvAnimals.Size = new Size(790, 450);
             dgvAnimals.TabIndex = 1;
+            dgvAnimals.CellClick += dgvAnimals_CellClick;
             // 
             // grpActions
             // 
             grpActions.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            grpActions.BackColor = Color.FromArgb(224, 224, 224);
             grpActions.Controls.Add(btnAdd);
             grpActions.Controls.Add(btnUpdate);
             grpActions.Controls.Add(btnCancel);
             grpActions.Controls.Add(btnDelete);
             grpActions.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            grpActions.ForeColor = Color.DarkGreen;
-            grpActions.Location = new Point(1190, 115);
+            grpActions.ForeColor = Color.Black;
+            grpActions.Location = new Point(1183, 115);
             grpActions.Name = "grpActions";
-            grpActions.Size = new Size(190, 505);
+            grpActions.Size = new Size(190, 329);
             grpActions.TabIndex = 16;
             grpActions.TabStop = false;
             grpActions.Text = "Actions";
@@ -403,25 +438,209 @@
             // grpSummaryArea
             // 
             grpSummaryArea.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            grpSummaryArea.Controls.Add(lblReleaseReadyCaption);
+            grpSummaryArea.Controls.Add(lblRecoveringCaption);
+            grpSummaryArea.Controls.Add(lblSeriousCaption);
+            grpSummaryArea.Controls.Add(lblStableCaption);
+            grpSummaryArea.Controls.Add(lblCriticalCaption);
+            grpSummaryArea.Controls.Add(lblAverageScoreCaption);
+            grpSummaryArea.Controls.Add(lblAverageAgeCaption);
+            grpSummaryArea.Controls.Add(lblTotalCaption);
+            grpSummaryArea.Controls.Add(lblReleaseReady);
+            grpSummaryArea.Controls.Add(lblRecovering);
+            grpSummaryArea.Controls.Add(lblStable);
+            grpSummaryArea.Controls.Add(lblSerious);
+            grpSummaryArea.Controls.Add(lblCritical);
+            grpSummaryArea.Controls.Add(lblAvgScore);
+            grpSummaryArea.Controls.Add(lblAvgAge);
+            grpSummaryArea.Controls.Add(lblTotal);
+            grpSummaryArea.Controls.Add(btnGenerateSummary);
+            grpSummaryArea.Controls.Add(pnlSummaryStats);
             grpSummaryArea.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            grpSummaryArea.ForeColor = Color.DarkGreen;
+            grpSummaryArea.ForeColor = Color.Black;
             grpSummaryArea.Location = new Point(350, 635);
             grpSummaryArea.Name = "grpSummaryArea";
             grpSummaryArea.Size = new Size(1030, 110);
             grpSummaryArea.TabIndex = 17;
             grpSummaryArea.TabStop = false;
             grpSummaryArea.Text = "Summary Report";
+            grpSummaryArea.Enter += grpSummaryArea_Enter;
             // 
-            // picLogo
+            // lblReleaseReadyCaption
             // 
-            picLogo.BackColor = Color.Transparent;
-            picLogo.Image = (Image)resources.GetObject("picLogo.Image");
-            picLogo.Location = new Point(20, 12);
-            picLogo.Name = "picLogo";
-            picLogo.Size = new Size(70, 70);
-            picLogo.SizeMode = PictureBoxSizeMode.Zoom;
-            picLogo.TabIndex = 2;
-            picLogo.TabStop = false;
+            lblReleaseReadyCaption.AutoSize = true;
+            lblReleaseReadyCaption.Location = new Point(815, 30);
+            lblReleaseReadyCaption.Name = "lblReleaseReadyCaption";
+            lblReleaseReadyCaption.Size = new Size(111, 20);
+            lblReleaseReadyCaption.TabIndex = 16;
+            lblReleaseReadyCaption.Text = "Release-Ready";
+            // 
+            // lblRecoveringCaption
+            // 
+            lblRecoveringCaption.AutoSize = true;
+            lblRecoveringCaption.Location = new Point(705, 30);
+            lblRecoveringCaption.Name = "lblRecoveringCaption";
+            lblRecoveringCaption.Size = new Size(87, 20);
+            lblRecoveringCaption.TabIndex = 15;
+            lblRecoveringCaption.Text = "Recovering";
+            // 
+            // lblSeriousCaption
+            // 
+            lblSeriousCaption.AutoSize = true;
+            lblSeriousCaption.Location = new Point(550, 30);
+            lblSeriousCaption.Name = "lblSeriousCaption";
+            lblSeriousCaption.Size = new Size(60, 20);
+            lblSeriousCaption.TabIndex = 14;
+            lblSeriousCaption.Text = "Serious";
+            // 
+            // lblStableCaption
+            // 
+            lblStableCaption.AutoSize = true;
+            lblStableCaption.Location = new Point(630, 30);
+            lblStableCaption.Name = "lblStableCaption";
+            lblStableCaption.Size = new Size(52, 20);
+            lblStableCaption.TabIndex = 13;
+            lblStableCaption.Text = "Stable";
+            // 
+            // lblCriticalCaption
+            // 
+            lblCriticalCaption.AutoSize = true;
+            lblCriticalCaption.Location = new Point(465, 30);
+            lblCriticalCaption.Name = "lblCriticalCaption";
+            lblCriticalCaption.Size = new Size(57, 20);
+            lblCriticalCaption.TabIndex = 12;
+            lblCriticalCaption.Text = "Critical";
+            // 
+            // lblAverageScoreCaption
+            // 
+            lblAverageScoreCaption.AutoSize = true;
+            lblAverageScoreCaption.Location = new Point(365, 30);
+            lblAverageScoreCaption.Name = "lblAverageScoreCaption";
+            lblAverageScoreCaption.Size = new Size(79, 20);
+            lblAverageScoreCaption.TabIndex = 11;
+            lblAverageScoreCaption.Text = "Avg Score";
+            // 
+            // lblAverageAgeCaption
+            // 
+            lblAverageAgeCaption.AutoSize = true;
+            lblAverageAgeCaption.Location = new Point(275, 30);
+            lblAverageAgeCaption.Name = "lblAverageAgeCaption";
+            lblAverageAgeCaption.Size = new Size(69, 20);
+            lblAverageAgeCaption.TabIndex = 10;
+            lblAverageAgeCaption.Text = "Avg Age";
+            // 
+            // lblTotalCaption
+            // 
+            lblTotalCaption.AutoSize = true;
+            lblTotalCaption.Location = new Point(190, 30);
+            lblTotalCaption.Name = "lblTotalCaption";
+            lblTotalCaption.Size = new Size(44, 20);
+            lblTotalCaption.TabIndex = 9;
+            lblTotalCaption.Text = "Total";
+            // 
+            // lblReleaseReady
+            // 
+            lblReleaseReady.AutoSize = true;
+            lblReleaseReady.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblReleaseReady.Location = new Point(855, 58);
+            lblReleaseReady.Name = "lblReleaseReady";
+            lblReleaseReady.Size = new Size(15, 17);
+            lblReleaseReady.TabIndex = 8;
+            lblReleaseReady.Text = "0";
+            // 
+            // lblRecovering
+            // 
+            lblRecovering.AutoSize = true;
+            lblRecovering.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblRecovering.Location = new Point(740, 58);
+            lblRecovering.Name = "lblRecovering";
+            lblRecovering.Size = new Size(15, 17);
+            lblRecovering.TabIndex = 7;
+            lblRecovering.Text = "0";
+            // 
+            // lblStable
+            // 
+            lblStable.AutoSize = true;
+            lblStable.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblStable.Location = new Point(650, 58);
+            lblStable.Name = "lblStable";
+            lblStable.Size = new Size(15, 17);
+            lblStable.TabIndex = 6;
+            lblStable.Text = "0";
+            // 
+            // lblSerious
+            // 
+            lblSerious.AutoSize = true;
+            lblSerious.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblSerious.Location = new Point(570, 58);
+            lblSerious.Name = "lblSerious";
+            lblSerious.Size = new Size(15, 17);
+            lblSerious.TabIndex = 5;
+            lblSerious.Text = "0";
+            // 
+            // lblCritical
+            // 
+            lblCritical.AutoSize = true;
+            lblCritical.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblCritical.Location = new Point(485, 58);
+            lblCritical.Name = "lblCritical";
+            lblCritical.Size = new Size(15, 17);
+            lblCritical.TabIndex = 4;
+            lblCritical.Text = "0";
+            // 
+            // lblAvgScore
+            // 
+            lblAvgScore.AutoSize = true;
+            lblAvgScore.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblAvgScore.Location = new Point(390, 58);
+            lblAvgScore.Name = "lblAvgScore";
+            lblAvgScore.Size = new Size(15, 17);
+            lblAvgScore.TabIndex = 3;
+            lblAvgScore.Text = "0";
+            // 
+            // lblAvgAge
+            // 
+            lblAvgAge.AutoSize = true;
+            lblAvgAge.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblAvgAge.Location = new Point(295, 58);
+            lblAvgAge.Name = "lblAvgAge";
+            lblAvgAge.Size = new Size(15, 17);
+            lblAvgAge.TabIndex = 2;
+            lblAvgAge.Text = "0";
+            // 
+            // lblTotal
+            // 
+            lblTotal.AutoSize = true;
+            lblTotal.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTotal.Location = new Point(205, 58);
+            lblTotal.Name = "lblTotal";
+            lblTotal.Size = new Size(15, 17);
+            lblTotal.TabIndex = 1;
+            lblTotal.Text = "0";
+            // 
+            // btnGenerateSummary
+            // 
+            btnGenerateSummary.BackColor = Color.FromArgb(35, 127, 198);
+            btnGenerateSummary.FlatAppearance.BorderSize = 0;
+            btnGenerateSummary.FlatAppearance.MouseDownBackColor = Color.Lime;
+            btnGenerateSummary.FlatStyle = FlatStyle.Flat;
+            btnGenerateSummary.ForeColor = Color.White;
+            btnGenerateSummary.Location = new Point(6, 30);
+            btnGenerateSummary.Name = "btnGenerateSummary";
+            btnGenerateSummary.Size = new Size(150, 51);
+            btnGenerateSummary.TabIndex = 0;
+            btnGenerateSummary.Text = "Generate Summary";
+            btnGenerateSummary.UseVisualStyleBackColor = false;
+            btnGenerateSummary.Click += btnGenerateSummary_Click;
+            // 
+            // pnlSummaryStats
+            // 
+            pnlSummaryStats.BackColor = Color.FromArgb(224, 224, 224);
+            pnlSummaryStats.BorderStyle = BorderStyle.FixedSingle;
+            pnlSummaryStats.Location = new Point(180, 20);
+            pnlSummaryStats.Name = "pnlSummaryStats";
+            pnlSummaryStats.Size = new Size(830, 70);
+            pnlSummaryStats.TabIndex = 18;
             // 
             // Form1
             // 
@@ -442,6 +661,7 @@
             Load += Form1_Load;
             pnlHeader.ResumeLayout(false);
             pnlHeader.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)picLogo).EndInit();
             grpAnimalDetails.ResumeLayout(false);
             grpAnimalDetails.PerformLayout();
             grpSearch.ResumeLayout(false);
@@ -449,7 +669,8 @@
             grpAnimals.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvAnimals).EndInit();
             grpActions.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)picLogo).EndInit();
+            grpSummaryArea.ResumeLayout(false);
+            grpSummaryArea.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -481,5 +702,23 @@
         private GroupBox grpActions;
         private GroupBox grpSummaryArea;
         private PictureBox picLogo;
+        private Button btnGenerateSummary;
+        private Label lblCritical;
+        private Label lblAvgScore;
+        private Label lblAvgAge;
+        private Label lblTotal;
+        private Label lblReleaseReady;
+        private Label lblRecovering;
+        private Label lblStable;
+        private Label lblSerious;
+        private Label lblTotalCaption;
+        private Label lblRecoveringCaption;
+        private Label lblSeriousCaption;
+        private Label lblStableCaption;
+        private Label lblCriticalCaption;
+        private Label lblAverageScoreCaption;
+        private Label lblAverageAgeCaption;
+        private Label lblReleaseReadyCaption;
+        private Panel pnlSummaryStats;
     }
 }

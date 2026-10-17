@@ -187,6 +187,52 @@ namespace PRG271_Baobab_Ridge
 
         }
 
+        private void btnGenerateSummary_Click(object sender, EventArgs e)
+        {
+            SummaryResult result = SummaryReportService.Calculate(animals);
+
+            lblTotal.Text = result.Total.ToString();
+            lblAvgAge.Text = SummaryReportService.FormatAverage(result.AverageAge);
+            lblAvgScore.Text = SummaryReportService.FormatAverage(result.AverageRecoveryScore);
+            lblCritical.Text = result.StatusCounts["Critical"].ToString();
+            lblSerious.Text = result.StatusCounts["Serious"].ToString();
+            lblStable.Text = result.StatusCounts["Stable"].ToString();
+            lblRecovering.Text = result.StatusCounts["Recovering"].ToString();
+            lblReleaseReady.Text = result.StatusCounts["Release-Ready"].ToString();
+
+            string summaryPath =
+                Path.Combine(Application.StartupPath, "summary.txt");
+
+            try
+            {
+                SummaryReportService.SaveReport(
+                    summaryPath,
+                    SummaryReportService.BuildReportText(result, DateTime.Now));
+
+                MessageBox.Show("Summary report saved to summary.txt.");
+            }
+            catch (UnauthorizedAccessException)
+            {
+                MessageBox.Show(
+                    "The program does not have permission to write summary.txt.");
+            }
+            catch (IOException)
+            {
+                MessageBox.Show(
+                    "summary.txt is in use by another program or could not be written. Close it and try again.");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(
+                    "Something went wrong while saving the summary report.");
+            }
+        }
+
+        private void grpSummaryArea_Enter(object sender, EventArgs e)
+        {
+
+        }
+
         
     }
 }
