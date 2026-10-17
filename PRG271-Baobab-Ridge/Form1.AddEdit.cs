@@ -72,6 +72,12 @@
             //refresh grid -> clear form
             animals.Add(animal);
             RefreshGrid();
+
+            //Add message box to confirm addition
+            MessageBox.Show(
+                $"Animal added successfully \n\n" +
+                $"Status: {animal.Status} \n" +
+                $"Housing Unit: {animal.HousingUnit}");
             ClearForm();
         }
 
