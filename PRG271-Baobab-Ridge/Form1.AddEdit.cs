@@ -14,14 +14,35 @@
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            //read form input -> validate
-            if (!AnimalValidator.ValidateAnimalIdFormat(txtAnimalId.Text, out string animalId, out string error) ||
-                !AnimalValidator.ValidateAnimalName(txtName.Text, out string name, out error) ||
-                !AnimalValidator.ValidateAnimalSpecies(txtSpecies.Text, out string species, out error) ||
-                !AnimalValidator.ValidateAnimalAge(txtAge.Text, out int age, out error) ||
-                !AnimalValidator.ValidateRecoveryScore(txtRecoveryScore.Text, out int score, out error))
+            //read form input -> validate each field seperately with focus
+            if(!AnimalValidator.ValidateAnimalIdFormat(txtAnimalId.Text, out string animalId, out string error))
             {
-                MessageBox.Show(error, "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(error, "Invalid ID", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtAnimalId.Focus();
+                return;
+            }
+            if(!AnimalValidator.ValidateAnimalName(txtName.Text, out string name, out error))
+            {
+                MessageBox.Show(error, "Invalid Name", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtName.Focus();
+                return;
+            }
+            if (!AnimalValidator.ValidateAnimalSpecies(txtSpecies.Text, out string species, out error))
+            {
+                MessageBox.Show(error, "Invalid Species", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtSpecies.Focus();
+                return;
+            }
+            if (!AnimalValidator.ValidateAnimalAge(txtAge.Text, out int age, out error))
+            {
+                MessageBox.Show(error, "Invalid Age", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtAge.Focus();
+                return;
+            }
+            if (!AnimalValidator.ValidateRecoveryScore(txtRecoveryScore.Text, out int score, out error))
+            {
+                MessageBox.Show(error, "Invalid Recovery Score", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtRecoveryScore.Focus();
                 return;
             }
 
