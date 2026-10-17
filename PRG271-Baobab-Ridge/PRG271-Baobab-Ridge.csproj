@@ -34,4 +34,16 @@
     </EmbeddedResource>
   </ItemGroup>
 
+	<ItemGroup>
+		<Compile Update="Form1.AddEdit.cs">
+			<SubType>Code</SubType>
+		</Compile>
+
+		<Compile Update="Form1Delete.cs">
+			<SubType>Code</SubType>
+		</Compile>
+	</ItemGroup>
+
+
+
 </Project>
