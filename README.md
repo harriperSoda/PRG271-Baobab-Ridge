@@ -1,39 +1,36 @@
-<div align="center">
+# PRG271 Baobab Ridge
 
-# Baobab Ridge Wildlife Rehabilitation Records System
-
-![Status](https://img.shields.io/badge/status-in%20development-yellow)
+![Development: Final Review](https://img.shields.io/badge/Development-Final%20Review-orange)
 ![C#](https://img.shields.io/badge/C%23-.NET%208-512BD4?logo=dotnet)
-![Platform](https://img.shields.io/badge/platform-Windows-0078D4?logo=windows)
+![Platform](https://img.shields.io/badge/Platform-Windows-0078D4?logo=windows)
 ![UI](https://img.shields.io/badge/UI-Windows%20Forms-5C2D91)
-![Storage](https://img.shields.io/badge/storage-text%20file-lightgrey)
 
-A Windows desktop application for managing animal rehabilitation records at Baobab Ridge. The system validates animal information, classifies recovery progress, loads stored records safely, and presents valid records in an accessible interface.
+A Windows Forms application for managing animal rehabilitation records at Baobab Ridge Wildlife Rehabilitation Centre. It validates, stores, updates, deletes, classifies and summarises animal records using text files.
 
-[Repository](https://github.com/harriperSoda/PRG271-Baobab-Ridge)
+## Team Members
 
-</div>
+| Member | Student number |
+|---|---|
+| Aman Harripersadh | `603758` |
+| Mickayla Samuel | `[Add student number]` |
+| Tanea Dhanjee | `[Add student number]` |
+| Sintle Mlangeni | `[Add student number]` |
 
 ## Features
 
 ### Currently implemented
 
 - Load animal records from `animals.txt`.
-- Create the data file automatically when it does not exist.
-- Validate animal IDs, names, species, ages, and recovery scores.
-- Require animal IDs to follow the `WR-####` format.
-- Automatically classify animals according to their recovery score.
-- Assign the appropriate status and housing unit.
-- Skip malformed or inconsistent file rows without stopping the application.
-- Display row-specific explanations when records are skipped.
-- Display valid animals in their original file order.
-- Prevent direct editing through the read-only `DataGridView`.
-
-### In development
-
-- Add new animal records — **TBD**
-- Remaining record-management features — **TBD**
-- Final user-interface design — **TBD**
+- Validate all animal fields and skip invalid file rows safely.
+- Add new animals with unique IDs.
+- Search for animals by ID.
+- Select and update existing animals.
+- Recalculate status and housing after recovery-score changes.
+- Clear the input fields and exit edit mode.
+- Delete one selected animal after confirmation.
+- Display records in a read-only `DataGridView`.
+- Generate summary statistics and save them to `summary.txt`.
+- Handle common file-access errors without closing the application.
 
 ## Recovery Classification
 
@@ -47,44 +44,37 @@ A Windows desktop application for managing animal rehabilitation records at Baob
 
 ## Tech Stack
 
-- **C#** — implements the application logic, animal model, validation, and recovery classification.
-- **.NET 8** — provides the application runtime and framework.
-- **Windows Forms** — provides the Windows desktop interface.
-- **DataGridView** — displays animal records in a read-only table.
-- **Text-file storage** — stores animal records in `animals.txt` using pipe-separated fields.
-- **Git and GitHub** — provide version control, feature branching, pull requests, and team collaboration.
+- **C# and .NET 8**
+- **Windows Forms**
+- **DataGridView**
+- **Pipe-separated text-file storage**
+- **Git and GitHub**
 
-The application currently has no external packages, database, web service, or environment-variable requirements.
+The project does not require a database, web service, environment variables or external packages.
 
 ## Architecture
 
 ```mermaid
 flowchart LR
-    File["animals.txt"] --> Loader["Form1.LoadAnimals()"]
+    UI["Form1 Windows Forms UI"] --> Validator["AnimalValidator"]
+    Validator --> Model["Animal"]
+    Model --> Classification["Recovery Classification"]
 
-    Loader --> Validator["AnimalValidator"]
-    Validator --> Loader
+    UI --> AnimalFile["animals.txt"]
+    UI --> DeleteHandler["DataHandler"]
+    DeleteHandler --> AnimalFile
 
-    Loader --> Model["Animal objects"]
-    Model --> Classification["ClassifyRecovery()"]
-
-    Model --> Collection["List&lt;Animal&gt;"]
-    Collection --> Grid["Read-only DataGridView"]
-
-    Loader --> Warning["Skipped-row warning"]
+    UI --> Summary["SummaryReportService"]
+    Summary --> Report["summary.txt"]
 ```
 
 ### Application flow
 
-1. The Windows Form starts and calls `LoadAnimals()`.
-2. The application locates `animals.txt` in the application folder.
-3. Each row is split into its seven expected fields.
-4. `AnimalValidator` validates the stored values.
-5. Valid values are used to construct an `Animal`.
-6. The constructor calculates the animal’s status and housing unit.
-7. The calculated classification is compared with the values stored in the file.
-8. Valid animals are added to the list and displayed in the grid.
-9. Malformed rows are skipped and reported to the user.
+1. The application loads and validates records from `animals.txt`.
+2. Valid animals are displayed in their original file order.
+3. Add and Update validate every field before saving.
+4. Delete confirms the selected animal before rewriting the file.
+5. Generate Summary calculates totals and averages and overwrites `summary.txt`.
 
 ## Project Structure
 
@@ -95,37 +85,41 @@ PRG271-Baobab-Ridge/
 └── PRG271-Baobab-Ridge/
     ├── Animal.cs
     ├── AnimalValidator.cs
+    ├── DataHandler.cs
     ├── Form1.cs
+    ├── Form1.AddEdit.cs
+    ├── Form1Delete.cs
     ├── Form1.Designer.cs
     ├── Form1.resx
     ├── Program.cs
     ├── animals.txt
+    ├── Services/
+    │   └── SummaryReportService.cs
+    ├── Properties/
+    │   └── Resources.resx
     ├── PRG271-Baobab-Ridge.csproj
     └── PRG271-Baobab-Ridge.slnx
 ```
 
 | File | Responsibility |
 |---|---|
-| `Animal.cs` | Defines animal properties and recovery-classification logic. |
-| `AnimalValidator.cs` | Provides reusable validation methods and error messages. |
-| `Form1.cs` | Loads, validates, and displays animal records. |
-| `Form1.Designer.cs` | Defines the Windows Forms controls and layout. |
-| `Program.cs` | Starts the application. |
-| `animals.txt` | Stores pipe-separated animal records. |
-| `PRG271-Baobab-Ridge.csproj` | Defines the .NET project configuration and includes the data file. |
-| `PRG271-Baobab-Ridge.slnx` | Visual Studio solution file. |
+| `Animal.cs` | Defines animal properties and recovery classification. |
+| `AnimalValidator.cs` | Validates user and file input. |
+| `Form1.cs` | Loads animals and generates summary reports. |
+| `Form1.AddEdit.cs` | Handles Add, Search, Update and Clear. |
+| `Form1Delete.cs` | Handles selection validation and deletion. |
+| `DataHandler.cs` | Removes a matching animal from the data file. |
+| `SummaryReportService.cs` | Calculates, formats and saves summaries. |
+| `Form1.Designer.cs` | Defines the form controls and layout. |
 
 ## Installation and Setup
 
 ### Prerequisites
 
 - Windows 10 or later
-- [Visual Studio 2022](https://visualstudio.microsoft.com/vs/)
-- The **.NET desktop development** workload
-- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+- Visual Studio 2022 or later with the **.NET desktop development** workload
+- .NET 8 SDK
 - Git
-
-No database or environment-variable configuration is currently required.
 
 ### Clone the repository
 
@@ -137,9 +131,8 @@ cd PRG271-Baobab-Ridge
 ### Run with Visual Studio
 
 1. Open `PRG271-Baobab-Ridge/PRG271-Baobab-Ridge.slnx`.
-2. Allow Visual Studio to restore the project.
-3. Build the solution.
-4. Press `F5` or select **Start**.
+2. Build the solution.
+3. Press `F5` or select **Start**.
 
 ### Run from the command line
 
@@ -148,20 +141,20 @@ dotnet build .\PRG271-Baobab-Ridge\PRG271-Baobab-Ridge.csproj
 dotnet run --project .\PRG271-Baobab-Ridge\PRG271-Baobab-Ridge.csproj
 ```
 
-The project copies `animals.txt` into the application output folder. If the file is missing at runtime, the application creates an empty one.
-
 ## Usage
 
-1. Start the application.
-2. The application automatically reads `animals.txt`.
-3. Valid animal records appear in the read-only grid.
-4. If malformed records are found, the application displays:
-   - The number of successfully loaded animals
-   - The number of skipped rows
-   - The row number and reason for each skipped record
-5. Review the displayed animal details, recovery status, and assigned housing unit.
+1. Start the application to load the saved animals.
+2. Enter valid details and select **Add Animal** to create a record.
+3. Search by ID or select a grid row to load an animal for editing.
+4. Select **Save Changes** to update it or **Clear** to leave edit mode.
+5. Select a row and choose **Delete Animal** to remove it after confirmation.
+6. Select **Generate Summary** to display statistics and save `summary.txt`.
 
-Each file row uses the following format:
+## File Formats
+
+### `animals.txt`
+
+Each line stores one animal using seven pipe-separated fields:
 
 ```text
 AnimalId|Name|Species|Age|RecoveryScore|Status|HousingUnit
@@ -173,76 +166,70 @@ Example:
 WR-0001|Thabo|African Penguin|4|85|Release-Ready|Pre-Release Camp
 ```
 
+The application creates this file when missing and skips malformed or inconsistent rows.
+
+### `summary.txt`
+
+This human-readable report contains:
+
+- Date and time generated
+- Total number of animals
+- Average age
+- Average recovery score
+- Number of animals in each status
+
+The file is overwritten whenever a new summary is generated. Empty data displays averages as `N/A`.
+
 ## Screenshots
 
-**TBD:** Add screenshots after the final interface has been completed.
-
-A suggested location is:
+A final application screenshot has not yet been committed. It can be added at:
 
 ```text
-docs/images/animal-grid.png
-```
-
-The screenshot can then be added with:
-
-```markdown
-![Animal records displayed in the application](docs/images/animal-grid.png)
+docs/images/application.png
 ```
 
 ## Engineering Decisions
 
 ### Centralised validation
 
-Animal validation is contained in `AnimalValidator` so that loading, adding, and updating animals can use the same rules and error messages.
+`AnimalValidator` applies the same validation rules when loading, adding and updating animals.
 
 ### Derived classification
 
-Status and housing unit are calculated from the recovery score instead of being manually supplied to the `Animal` constructor. This reduces the chance of inconsistent classifications.
+Status and housing unit are calculated from the recovery score instead of being entered manually.
 
-### File consistency checking
+### Safe record management
 
-The loader recalculates each animal’s classification and compares it with the status and housing unit stored in the file. Inconsistent rows are skipped instead of displaying incorrect information.
+The grid is read-only. Records can only be changed through validated Add, Update and Delete operations.
 
-### Resilient file loading
+### Partial form classes
 
-One malformed row does not prevent the rest of the file from loading. Each invalid row is skipped, recorded, and reported to the user.
+Form behaviour is separated into partial files for loading, add/edit actions and deletion while retaining one `Form1` class.
 
 ### Flat-file storage
 
-A text file keeps the project simple and meets its current requirements. The trade-off is that it does not provide database features such as concurrent access, transactions, or complex queries.
-
-### Read-only record display
-
-The grid is read-only so records cannot be changed without passing through the application’s validation and file-saving process.
+Text files keep the project simple and satisfy the project requirements without requiring a database.
 
 ## Testing
 
-The project currently uses manual testing.
+The application has been tested manually for:
 
-Tests completed include:
+- Successful build and startup
+- Valid and invalid file loading
+- Field validation and focus
+- Duplicate Animal IDs
+- Adding and updating animals
+- Status and housing recalculation
+- Search success and not-found handling
+- Clear behaviour
+- Delete selection and confirmation
+- Summary calculations and file generation
+- Common file-access failures
 
-- Building the solution successfully.
-- Loading valid animal records.
-- Preserving the order of records from the file.
-- Displaying records in the read-only grid.
-- Skipping malformed rows.
-- Reporting invalid animal IDs with a row-specific error.
-- Checking calculated classification against stored classification.
-
-To verify the project builds:
-
-```powershell
-dotnet build .\PRG271-Baobab-Ridge\PRG271-Baobab-Ridge.csproj
-```
-
-Automated unit tests are **TBD**.
+Automated unit tests have not been added.
 
 ## Limitations and Future Improvements
 
-- Animal creation and the remaining management features are still being developed.
-- The application currently uses a text file rather than a database.
-- The file-loading logic currently resides inside `Form1` and could later be moved into a separate repository or service class.
-- The `Animal` constructor relies on callers to validate the recovery score before creating the object.
-- Automated tests have not yet been added.
-- The application currently supports Windows only.
-- The final interface design and screenshots are **TBD**.
+- The application supports Windows only.
+- Text files do not provide database transactions or concurrent-user support.
+- File-loading logic remains inside `Form1`.
