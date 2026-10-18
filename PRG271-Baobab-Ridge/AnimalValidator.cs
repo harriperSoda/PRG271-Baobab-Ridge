@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 
 namespace PRG271_Baobab_Ridge
 {
-    internal static class AnimalValidator //Thhis class will handle all validation regarding the Animal class and its properties
+    internal static class AnimalValidator //This class will handle all validation regarding the Animal class and its properties
     //used static as we will not be instantianting this class - its used as a utility class. This means we dont need to create an object of this class to use its methods - we can call them directly using the class name. We will never need to instante it, so we just leave it as static
     {
+        //Validation for animal name, species, age and recovery score. Each method will return a boolean indicating if the validation passed or failed, and will also return an error message if it failed.
         public static bool ValidateAnimalIdFormat( string idInput, out string animalId, out string errorMessage) // "out" is for us to return the cleaned up ID. Works with below line
         {
             //trim spaces and convert to uppercase
             animalId = idInput.Trim().ToUpper(); //assign animal id (which is sent back) to the idInput we recieved
-            //***POTENTIAL BUG: Trimming a null will cause an error. However im not sure if this will occur with textbox input. We will need to test this. If it does occur, we can use a null conditional operator to check for null before trimming. This is a potential bug that may need to be fixed in the future. For now, we will leave it as is and test it later. Will need to be appliaed in below mwthods too
+            
 
-            //check if the animalId is null or empty. First check
+            //check if the animalId is null or empty. 
             if (string.IsNullOrWhiteSpace(animalId))
             {
                 errorMessage = "Animal ID cannot be empty.";
@@ -50,7 +51,7 @@ namespace PRG271_Baobab_Ridge
 
 
         }
-
+        
         public static bool ValidateAnimalName(string nameInput, out string animalName, out string errorMessage)
         {
             //trim spaces

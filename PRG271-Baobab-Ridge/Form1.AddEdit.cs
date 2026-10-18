@@ -2,9 +2,9 @@
 {
     public partial class Form1
     {
-        private Animal? editingAnimal = null;
+        private Animal? editingAnimal = null; //Tracks the animal currently being edited, or null if in Add Mode
 
-        private string AnimalsFilePath => Path.Combine(Application.StartupPath, "animals.txt");
+        private string AnimalsFilePath => Path.Combine(Application.StartupPath, "animals.txt");// Gets the full path to animals.txt in the application's running directory.
 
         //Refreshed the animal grid and clears auto selected rows
         private void RefreshGrid()
@@ -17,21 +17,21 @@
             dgvAnimals.Columns["RecoveryScore"].HeaderText = "Recovery Score";
             dgvAnimals.Columns["HousingUnit"].HeaderText = "Housing Unit";
 
-            //requires the use to select a row
+            //requires the user to select a row
             dgvAnimals.ClearSelection();
             dgvAnimals.CurrentCell = null;
         }
-
+        //Validates the entered details, saves a new animal, and refreshes the grid.
         private void btnAdd_Click(object sender, EventArgs e)
         {
             //read form input -> validate each field seperately with focus
-            if(!AnimalValidator.ValidateAnimalIdFormat(txtAnimalId.Text, out string animalId, out string error))
+            if (!AnimalValidator.ValidateAnimalIdFormat(txtAnimalId.Text, out string animalId, out string error))
             {
                 MessageBox.Show(error, "Invalid ID", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtAnimalId.Focus();
                 return;
             }
-            if(!AnimalValidator.ValidateAnimalName(txtName.Text, out string name, out error))
+            if (!AnimalValidator.ValidateAnimalName(txtName.Text, out string name, out error))
             {
                 MessageBox.Show(error, "Invalid Name", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtName.Focus();
@@ -61,6 +61,7 @@
             {
                 MessageBox.Show($"An animal with ID {animalId} already exists.",
                     "Duplicate ID", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtAnimalId.Focus();
                 return;
             }
 
@@ -79,7 +80,7 @@
                 return;
             }
 
-            //refresh grid -> clear form
+            //Add the successfully saved animal to the grid.
             animals.Add(animal);
             RefreshGrid();
 
@@ -90,7 +91,7 @@
                 $"Housing Unit: {animal.HousingUnit}");
             ClearForm();
         }
-
+        //Appends one animal record while preserving correct line separation.
         private void AppendAnimalToFile(Animal animal)
         {
             string path = AnimalsFilePath;
@@ -105,12 +106,12 @@
 
             File.AppendAllText(path, prefix + FormatAnimalLine(animal) + Environment.NewLine);
         }
-
+        // Converts an animal into the pipe-delimited format used by animals.txt.
         private static string FormatAnimalLine(Animal a)
         {
             return string.Join("|", a.AnimalId, a.Name, a.Species, a.Age, a.RecoveryScore, a.Status, a.HousingUnit);
         }
-
+        //Clears the animal input fields and returns focus to Animal ID.
         private void ClearForm()
         {
             txtAnimalId.Clear();
@@ -120,10 +121,10 @@
             txtRecoveryScore.Clear();
             txtAnimalId.Focus();
         }
-
+        //Opens the selected grid animal for editing.
         private void dgvAnimals_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0) return; //header click
+            if (e.RowIndex < 0) return; //ignore column header click
 
             if (dgvAnimals.Rows[e.RowIndex].DataBoundItem is Animal selected)
             {
@@ -151,7 +152,7 @@
             EnterEditMode(found);
         }
 
-        //enter Edit Mode
+        //Loads the selected animal into the fields and enables edit controls.
         private void EnterEditMode(Animal animal)
         {
             editingAnimal = animal;
@@ -230,10 +231,10 @@
             }
 
             RefreshGrid();
-            ExitEditMode(); //back to Add Mode
+            ExitEditMode(); 
         }
 
-       
+        // Replaces the matching animal record in animals.txt.
         private void ReplaceAnimalLineInFile(Animal animal)
         {
             string[] lines = File.ReadAllLines(AnimalsFilePath);
@@ -257,12 +258,12 @@
 
             File.WriteAllLines(AnimalsFilePath, lines);
         }
-
+        //Cancels editing and returns the form to add mode.
         private void btnCancel_Click(object sender, EventArgs e)
         {
             ExitEditMode();
         }
-
+        // Clears the selected animal and restores the default add mode.
         private void ExitEditMode()
         {
             editingAnimal = null;
