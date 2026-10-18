@@ -182,11 +182,9 @@ The file is overwritten whenever a new summary is generated. Empty data displays
 
 ## Screenshots
 
-A final application screenshot has not yet been committed. It can be added at:
 
-```text
-docs/images/application.png
-```
+
+![Baobab Ridge application interface](docs/images/application.png)
 
 ## Engineering Decisions
 
