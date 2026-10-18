@@ -13,7 +13,7 @@ A Windows Forms application for managing animal rehabilitation records at Baobab
 |---|---|
 | Aman Harripersadh | `603758` |
 | Mickayla Samuel | `[Add student number]` |
-| Tanea Dhanjee | `[Add student number]` |
+| Tanea Dhanjee | `604495` |
 | Sintle Mlangeni | `[Add student number]` |
 
 ## Features
