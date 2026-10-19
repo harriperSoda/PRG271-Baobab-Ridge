@@ -73,6 +73,16 @@
             {
                 AppendAnimalToFile(animal);
             }
+            catch(UnauthorizedAccessException)
+            {
+                MessageBox.Show(
+                "You do not have permission to write to animals.txt.",
+                "Access Denied",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
+
+                return;
+            }
             catch (IOException ex)
             {
                 MessageBox.Show("Could not save to animals.txt:\n" + ex.Message,
@@ -217,7 +227,7 @@
             {
                 ReplaceAnimalLineInFile(editingAnimal);
             }
-            catch (Exception ex) when (ex is IOException || ex is InvalidOperationException)
+            catch (Exception ex) when (ex is IOException || ex is UnauthorizedAccessException || ex is InvalidOperationException)
             {
                 editingAnimal.Name = oldName;
                 editingAnimal.Species = oldSpecies;
