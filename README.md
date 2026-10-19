@@ -12,7 +12,7 @@ A Windows Forms application for managing animal rehabilitation records at Baobab
 | Member | Student number |
 |---|---|
 | Aman Harripersadh | `603758` |
-| Mickayla Samuel | `[Add student number]` |
+| Mickayla Samuel | `604505` |
 | Tanea Dhanjee | `604495` |
 | Sintle Mlangeni | `577181` |
 
