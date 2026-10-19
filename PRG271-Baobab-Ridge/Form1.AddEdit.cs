@@ -2,26 +2,57 @@
 {
     public partial class Form1
     {
-        private Animal? editingAnimal = null;
+        private Animal? editingAnimal = null; //Tracks the animal currently being edited, or null if in Add Mode
 
-        private string AnimalsFilePath => Path.Combine(Application.StartupPath, "animals.txt");
+        private string AnimalsFilePath => Path.Combine(Application.StartupPath, "animals.txt");// Gets the full path to animals.txt in the application's running directory.
 
+        //Refreshed the animal grid and clears auto selected rows
         private void RefreshGrid()
         {
             dgvAnimals.DataSource = null;
             dgvAnimals.DataSource = animals;
-        }
 
+            //Restore the prior user-friendly columns and headings. Without this it reverts back to AnimalID, instead of Animal ID
+            dgvAnimals.Columns["AnimalId"].HeaderText = "Animal ID";
+            dgvAnimals.Columns["RecoveryScore"].HeaderText = "Recovery Score";
+            dgvAnimals.Columns["HousingUnit"].HeaderText = "Housing Unit";
+
+            //requires the user to select a row
+            dgvAnimals.ClearSelection();
+            dgvAnimals.CurrentCell = null;
+        }
+        //Validates the entered details, saves a new animal, and refreshes the grid.
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            //read form input -> validate
-            if (!AnimalValidator.ValidateAnimalIdFormat(txtAnimalId.Text, out string animalId, out string error) ||
-                !AnimalValidator.ValidateAnimalName(txtName.Text, out string name, out error) ||
-                !AnimalValidator.ValidateAnimalSpecies(txtSpecies.Text, out string species, out error) ||
-                !AnimalValidator.ValidateAnimalAge(txtAge.Text, out int age, out error) ||
-                !AnimalValidator.ValidateRecoveryScore(txtRecoveryScore.Text, out int score, out error))
+            //read form input -> validate each field seperately with focus
+            if (!AnimalValidator.ValidateAnimalIdFormat(txtAnimalId.Text, out string animalId, out string error))
             {
-                MessageBox.Show(error, "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(error, "Invalid ID", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtAnimalId.Focus();
+                return;
+            }
+            if (!AnimalValidator.ValidateAnimalName(txtName.Text, out string name, out error))
+            {
+                MessageBox.Show(error, "Invalid Name", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtName.Focus();
+                return;
+            }
+            if (!AnimalValidator.ValidateAnimalSpecies(txtSpecies.Text, out string species, out error))
+            {
+                MessageBox.Show(error, "Invalid Species", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtSpecies.Focus();
+                return;
+            }
+            if (!AnimalValidator.ValidateAnimalAge(txtAge.Text, out int age, out error))
+            {
+                MessageBox.Show(error, "Invalid Age", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtAge.Focus();
+                return;
+            }
+            if (!AnimalValidator.ValidateRecoveryScore(txtRecoveryScore.Text, out int score, out error))
+            {
+                MessageBox.Show(error, "Invalid Recovery Score", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtRecoveryScore.Focus();
                 return;
             }
 
@@ -30,6 +61,7 @@
             {
                 MessageBox.Show($"An animal with ID {animalId} already exists.",
                     "Duplicate ID", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtAnimalId.Focus();
                 return;
             }
 
@@ -41,6 +73,16 @@
             {
                 AppendAnimalToFile(animal);
             }
+            catch(UnauthorizedAccessException)
+            {
+                MessageBox.Show(
+                "You do not have permission to write to animals.txt.",
+                "Access Denied",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
+
+                return;
+            }
             catch (IOException ex)
             {
                 MessageBox.Show("Could not save to animals.txt:\n" + ex.Message,
@@ -48,12 +90,18 @@
                 return;
             }
 
-            //refresh grid -> clear form
+            //Add the successfully saved animal to the grid.
             animals.Add(animal);
             RefreshGrid();
+
+            //Add message box to confirm addition
+            MessageBox.Show(
+                $"Animal added successfully \n\n" +
+                $"Status: {animal.Status} \n" +
+                $"Housing Unit: {animal.HousingUnit}");
             ClearForm();
         }
-
+        //Appends one animal record while preserving correct line separation.
         private void AppendAnimalToFile(Animal animal)
         {
             string path = AnimalsFilePath;
@@ -68,12 +116,12 @@
 
             File.AppendAllText(path, prefix + FormatAnimalLine(animal) + Environment.NewLine);
         }
-
+        // Converts an animal into the pipe-delimited format used by animals.txt.
         private static string FormatAnimalLine(Animal a)
         {
             return string.Join("|", a.AnimalId, a.Name, a.Species, a.Age, a.RecoveryScore, a.Status, a.HousingUnit);
         }
-
+        //Clears the animal input fields and returns focus to Animal ID.
         private void ClearForm()
         {
             txtAnimalId.Clear();
@@ -83,10 +131,10 @@
             txtRecoveryScore.Clear();
             txtAnimalId.Focus();
         }
-
+        //Opens the selected grid animal for editing.
         private void dgvAnimals_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0) return; //header click
+            if (e.RowIndex < 0) return; //ignore column header click
 
             if (dgvAnimals.Rows[e.RowIndex].DataBoundItem is Animal selected)
             {
@@ -114,7 +162,7 @@
             EnterEditMode(found);
         }
 
-        //enter Edit Mode
+        //Loads the selected animal into the fields and enables edit controls.
         private void EnterEditMode(Animal animal)
         {
             editingAnimal = animal;
@@ -136,15 +184,32 @@
         {
             if (editingAnimal == null) return;
 
-            //the ID is locked, so only validate the editable fields
-            if (!AnimalValidator.ValidateAnimalName(txtName.Text, out string name, out string error) ||
-                !AnimalValidator.ValidateAnimalSpecies(txtSpecies.Text, out string species, out error) ||
-                !AnimalValidator.ValidateAnimalAge(txtAge.Text, out int age, out error) ||
-                !AnimalValidator.ValidateRecoveryScore(txtRecoveryScore.Text, out int score, out error))
+            //the ID is locked, so only validate the editable fields seperately and add focus on invalid field
+            if(!AnimalValidator.ValidateAnimalName(txtName.Text, out string name, out string error))
             {
-                MessageBox.Show(error, "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(error, "Invalid Name", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtName.Focus();
                 return;
             }
+            if (!AnimalValidator.ValidateAnimalSpecies(txtSpecies.Text, out string species, out error))
+            {
+                MessageBox.Show(error, "Invalid Species", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtSpecies.Focus();
+                return;
+            }
+            if (!AnimalValidator.ValidateAnimalAge(txtAge.Text, out int age, out error))
+            {
+                MessageBox.Show(error, "Invalid Age", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtAge.Focus();
+                return;
+            }
+            if (!AnimalValidator.ValidateRecoveryScore(txtRecoveryScore.Text, out int score, out error))
+            {
+                MessageBox.Show(error, "Invalid Recovery Score", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtRecoveryScore.Focus();
+                return;
+            }
+
 
             //remember old values so we can roll back if the file write fails
             string oldName = editingAnimal.Name;
@@ -162,7 +227,7 @@
             {
                 ReplaceAnimalLineInFile(editingAnimal);
             }
-            catch (Exception ex) when (ex is IOException || ex is InvalidOperationException)
+            catch (Exception ex) when (ex is IOException || ex is UnauthorizedAccessException || ex is InvalidOperationException)
             {
                 editingAnimal.Name = oldName;
                 editingAnimal.Species = oldSpecies;
@@ -176,10 +241,10 @@
             }
 
             RefreshGrid();
-            ExitEditMode(); //back to Add Mode
+            ExitEditMode(); 
         }
 
-       
+        // Replaces the matching animal record in animals.txt.
         private void ReplaceAnimalLineInFile(Animal animal)
         {
             string[] lines = File.ReadAllLines(AnimalsFilePath);
@@ -203,12 +268,12 @@
 
             File.WriteAllLines(AnimalsFilePath, lines);
         }
-
+        //Cancels editing and returns the form to add mode.
         private void btnCancel_Click(object sender, EventArgs e)
         {
             ExitEditMode();
         }
-
+        // Clears the selected animal and restores the default add mode.
         private void ExitEditMode()
         {
             editingAnimal = null;
